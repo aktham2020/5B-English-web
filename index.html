@@ -29,205 +29,211 @@
     <!-- Tone.js for Audio FX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
-        body { font-family: 'Cairo', 'Inter', sans-serif; }
+        body { font-family: 'Cairo', 'Inter', sans-serif; overflow-x: hidden; width: 100%; }
         
         /* Premium Custom Smooth Scrollbar */
-        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: rgba(11, 15, 25, 0.6); border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); border-radius: 9999px; border: 2px solid transparent; background-clip: content-box; transition: background 0.3s ease; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.8); }
+        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); border-radius: 9999px; }
 
         .dark body { background-color: #080c14; color: #f1f5f9; }
         .light body { background-color: #f8fafc; color: #1e293b; }
 
-        .glass-panel { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(99, 102, 241, 0.2); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-panel { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(99, 102, 241, 0.2); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); width: 100%; max-width: 100%; box-sizing: border-box; }
         .light .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(203, 213, 225, 0.9); box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.12); }
         
         .modal-hidden { display: none !important; }
-        
         .hover-lift { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -10px rgba(99, 102, 241, 0.3); }
+        .hover-lift:hover { transform: translateY(-2px); }
 
-        .en-text { direction: ltr; text-align: left; font-family: 'Inter', sans-serif; display: block; }
+        .en-text { direction: ltr; text-align: left; font-family: 'Inter', sans-serif; word-break: break-word; overflow-wrap: break-word; }
         .en-inline { direction: ltr; unicode-bidi: embed; font-family: 'Inter', sans-serif; }
 
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.94) translateY(10px); }
+            0% { opacity: 0; transform: scale(0.96) translateY(6px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-        .unit-transition { animation: fadeInScale 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .unit-transition { animation: fadeInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
     </style>
 </head>
-<body class="bg-darkBg dark:bg-darkBg light:bg-lightBg text-slate-100 dark:text-slate-100 light:text-slate-800 min-h-screen transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+<body class="bg-darkBg dark:bg-darkBg light:bg-lightBg text-slate-100 dark:text-slate-100 light:text-slate-800 min-h-screen transition-colors duration-300 selection:bg-indigo-500 selection:text-white w-full max-w-[100vw]">
 
     <!-- STARTUP SPLASH SCREEN -->
-    <div id="startup-splash" class="fixed inset-0 z-[100] bg-darkBg flex flex-col items-center justify-center space-y-6 transition-opacity duration-700">
+    <div id="startup-splash" class="fixed inset-0 z-[100] bg-darkBg flex flex-col items-center justify-center space-y-6 transition-opacity duration-700 px-4 text-center">
         <div class="relative">
-            <div class="w-28 h-28 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-5xl shadow-2xl shadow-indigo-500/40 border-4 border-indigo-400/40 animate-pulse">🚀</div>
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-4xl sm:text-5xl shadow-2xl shadow-indigo-500/40 border-4 border-indigo-400/40 animate-pulse">🚀</div>
         </div>
-        <div class="text-center space-y-2">
-            <h1 class="text-3xl font-black bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent en-inline" dir="ltr">Connect 5 Ultimate Quest</h1>
-            <p class="text-sm font-bold text-indigo-400 tracking-wider">this web made by AkthamEmad</p>
+        <div class="text-center space-y-2 max-w-sm">
+            <h1 class="text-2xl sm:text-3xl font-black bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent en-inline" dir="ltr">Connect 5 Ultimate Quest</h1>
+            <p class="text-xs sm:text-sm font-bold text-indigo-400 tracking-wider">this web made by AkthamEmad</p>
         </div>
-        <div class="w-48 h-1.5 bg-slate-800 rounded-full overflow-hidden mt-4">
+        <div class="w-40 sm:w-48 h-1.5 bg-slate-800 rounded-full overflow-hidden mt-4">
             <div id="splash-progress" class="w-0 h-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-700"></div>
         </div>
     </div>
 
     <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-darkBorder dark:border-darkBorder light:border-lightBorder px-4 sm:px-8 py-4 shadow-xl">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <div class="relative cursor-pointer hover:scale-105 transition-transform group" onclick="playPopSound(); openAvatarModal()" title="انقر لتغيير الصورة الرمزية">
-                    <div id="header-avatar-display" class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-3xl shadow-lg shadow-indigo-500/25 overflow-hidden border-2 border-indigo-400/30">🚀</div>
-                    <div class="absolute -bottom-1 -right-1 bg-emerald-500 w-4 h-4 rounded-full border-2 border-darkBg animate-pulse"></div>
+    <header class="sticky top-0 z-40 glass-panel border-b border-darkBorder dark:border-darkBorder light:border-lightBorder px-3 sm:px-6 py-3 shadow-xl w-full">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
+            <div class="flex items-center justify-between w-full sm:w-auto gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="relative cursor-pointer hover:scale-105 transition-transform group shrink-0" onclick="playPopSound(); openAvatarModal()" title="انقر لتغيير الصورة الرمزية">
+                        <div id="header-avatar-display" class="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-lg shadow-indigo-500/25 overflow-hidden border-2 border-indigo-400/30">🚀</div>
+                        <div class="absolute -bottom-1 -right-1 bg-emerald-500 w-3.5 h-3.5 rounded-full border-2 border-darkBg animate-pulse"></div>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="font-black text-base sm:text-xl bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent en-inline truncate" dir="ltr">Connect 5 Quest</h1>
+                            <span class="text-[10px] sm:text-xs bg-indigo-500/15 text-indigo-300 font-bold px-2 py-0.5 rounded-lg border border-indigo-500/30 shrink-0">الصف الخامس</span>
+                        </div>
+                        <div class="flex items-center gap-2 mt-0.5">
+                            <p class="text-[11px] text-slate-400 font-medium truncate">المنهج الوزاري المصري 🌟</p>
+                            <span class="text-[10px] text-indigo-400 font-bold tracking-wide en-inline bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/25 shrink-0" dir="ltr">by Aktham</span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <div class="flex items-center gap-2.5">
-                        <h1 class="font-black text-xl sm:text-2xl bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-200 bg-clip-text text-transparent en-inline" dir="ltr">Connect 5 Quest</h1>
-                        <span class="text-xs bg-indigo-500/15 text-indigo-300 font-bold px-3 py-1 rounded-xl border border-indigo-500/30">الصف الخامس 2027</span>
-                    </div>
-                    <div class="flex items-center gap-2 mt-0.5">
-                        <p class="text-xs text-slate-400 font-medium">المنهج الوزاري المصري الرسمي 🌟</p>
-                        <span class="text-xs text-indigo-400 font-bold tracking-wide en-inline bg-indigo-500/10 px-2 py-0.5 rounded-lg border border-indigo-500/20" dir="ltr">made by Aktham</span>
-                    </div>
+
+                <!-- Mobile action toggle / quick buttons -->
+                <div class="flex items-center gap-1.5 sm:hidden shrink-0">
+                    <button onclick="playPopSound(); toggleTheme()" class="p-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-amber-600 dark:text-amber-300" title="تبديل السمة"><i id="theme-icon-m" class="fa-solid fa-sun text-sm"></i></button>
+                    <button onclick="playPopSound(); toggleAudio()" class="p-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400" title="الصوت"><i id="audio-icon-m" class="fa-solid fa-volume-high text-sm"></i></button>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-3 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-2xl shadow-inner">
-                    <span class="text-2xl animate-bounce">⭐</span>
+            <div class="flex items-center justify-between sm:justify-end flex-wrap gap-2 w-full sm:w-auto">
+                <div class="flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-2xl shadow-inner shrink-0">
+                    <span class="text-lg animate-bounce">⭐</span>
                     <div>
-                        <div class="text-[10px] text-amber-500 dark:text-amber-400 font-bold uppercase tracking-wider">مجموع النقاط</div>
-                        <div id="total-xp" class="text-base font-black text-amber-600 dark:text-amber-300 en-inline" dir="ltr">0 XP</div>
+                        <div class="text-[9px] text-amber-500 dark:text-amber-400 font-bold uppercase tracking-wider">النقاط</div>
+                        <div id="total-xp" class="text-xs sm:text-sm font-black text-amber-600 dark:text-amber-300 en-inline" dir="ltr">0 XP</div>
                     </div>
                 </div>
                 
-                <!-- Quick Friends & Chat Header Button -->
-                <button onclick="playPopSound(); switchTab('community')" class="flex items-center gap-2 px-3.5 py-2.5 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-600 dark:text-emerald-300 transition hover-lift shadow-sm" title="الأصدقاء والدردشة الفورية">
-                    <i class="fa-solid fa-users-line text-base"></i>
-                    <span class="text-xs font-bold hidden sm:inline">الأصدقاء</span>
-                    <span id="header-online-badge" class="w-5 h-5 rounded-full bg-emerald-500 text-white font-black text-[10px] flex items-center justify-center">0</span>
+                <button onclick="playPopSound(); switchTab('community')" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-600 dark:text-emerald-300 transition text-xs font-bold shrink-0" title="الأصدقاء والدردشة">
+                    <i class="fa-solid fa-users-line text-sm"></i>
+                    <span class="hidden xs:inline">الأصدقاء</span>
+                    <span id="header-online-badge" class="w-4 h-4 rounded-full bg-emerald-500 text-white font-black text-[9px] flex items-center justify-center">0</span>
                 </button>
 
-                <!-- Relocated & Enhanced Profile & Name Button right next to XP / Friends -->
-                <button onclick="playPopSound(); openProfileModal()" class="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30 border border-indigo-500/40 text-indigo-700 dark:text-indigo-200 transition hover-lift shadow-md group" title="إدارة الملف الشخصي والاسم">
-                    <div id="header-mini-avatar" class="w-6 h-6 rounded-lg bg-indigo-600 flex items-center justify-center text-xs overflow-hidden shadow text-white">🚀</div>
-                    <span id="header-username-display" class="text-xs font-black max-w-[110px] truncate">أبطال الخامس</span>
-                    <i class="fa-solid fa-pen-to-square text-[11px] text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition"></i>
+                <button onclick="playPopSound(); openProfileModal()" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-700 dark:text-indigo-200 transition shadow-md group shrink-0 max-w-[130px]">
+                    <div id="header-mini-avatar" class="w-5 h-5 rounded-md bg-indigo-600 flex items-center justify-center text-[10px] overflow-hidden shadow text-white shrink-0">🚀</div>
+                    <span id="header-username-display" class="text-xs font-black truncate">أبطال الخامس</span>
                 </button>
 
-                <button onclick="playPopSound(); toggleTheme()" class="p-3 rounded-2xl bg-slate-200 dark:bg-slate-800/80 hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder text-amber-600 dark:text-amber-300" title="تبديل وضع السمة">
-                    <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
-                </button>
-                <button onclick="playPopSound(); toggleAudio()" class="p-3 rounded-2xl bg-slate-200 dark:bg-slate-800/80 hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder text-indigo-600 dark:text-indigo-400" title="تشغيل/إيقاف الصوت">
-                    <i id="audio-icon" class="fa-solid fa-volume-high text-lg"></i>
-                </button>
+                <div class="hidden sm:flex items-center gap-2 shrink-0">
+                    <button onclick="playPopSound(); toggleTheme()" class="p-2.5 rounded-2xl bg-slate-200 dark:bg-slate-800 hover:bg-indigo-600/20 transition border border-slate-300 dark:border-darkBorder text-amber-600 dark:text-amber-300" title="تبديل وضع السمة">
+                        <i id="theme-icon" class="fa-solid fa-sun text-sm"></i>
+                    </button>
+                    <button onclick="playPopSound(); toggleAudio()" class="p-2.5 rounded-2xl bg-slate-200 dark:bg-slate-800 hover:bg-indigo-600/20 transition border border-slate-300 dark:border-darkBorder text-indigo-600 dark:text-indigo-400" title="تشغيل/إيقاف الصوت">
+                        <i id="audio-icon" class="fa-solid fa-volume-high text-sm"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-8">
+    <main class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-3 sm:py-6 space-y-4 sm:space-y-6 w-full box-sizing">
 
         <!-- UNITS SELECTOR -->
-        <section class="glass-panel rounded-3xl p-6 space-y-4 shadow-2xl">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-darkBorder pb-3">
-                <h2 class="font-black text-lg text-indigo-600 dark:text-indigo-300 flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-indigo-500 dark:text-indigo-400"></i> وحدات المنهج الدراسي (Units 1 - 6)
+        <section class="glass-panel rounded-3xl p-3.5 sm:p-6 space-y-3 shadow-2xl w-full">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-darkBorder pb-2.5">
+                <h2 class="font-black text-xs sm:text-base text-indigo-600 dark:text-indigo-300 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-indigo-500 dark:text-indigo-400"></i> وحدات المنهج الدراسي
                 </h2>
-                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-500/15 px-3 py-1 rounded-xl border border-indigo-500/30">اختر الوحدة للتفوق</span>
+                <span class="text-[10px] sm:text-[11px] font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-500/15 px-2 py-0.5 rounded-xl border border-indigo-500/30">اختر الوحدة</span>
             </div>
-            <div id="units-bar-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5"></div>
+            <div id="units-bar-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3.5 w-full"></div>
         </section>
 
         <!-- NAVIGATION TABS -->
-        <div class="flex overflow-x-auto gap-3 pb-2 scrollbar-none w-full">
-            <button onclick="playPopSound(); switchTab('vocab')" id="tab-vocab" class="tab-btn"><i class="fa-solid fa-book-open"></i> الكلمات والمفردات</button>
-            <button onclick="playPopSound(); switchTab('grammar')" id="tab-grammar" class="tab-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> شرح القواعد</button>
-            <button onclick="playPopSound(); switchTab('games')" id="tab-games" class="tab-btn"><i class="fa-solid fa-gamepad"></i> ألعاب التحدي (اكثر من 100+ سؤال)</button>
-            <button onclick="playPopSound(); switchTab('custom-games')" id="tab-custom-games" class="tab-btn"><i class="fa-solid fa-hat-wizard"></i> ابتكار الألعاب 🎮</button>
-            <button onclick="playPopSound(); switchTab('stories')" id="tab-stories" class="tab-btn"><i class="fa-solid fa-feather-pointed"></i> ركن القصص الحرة</button>
+        <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none w-full max-w-full" style="-webkit-overflow-scrolling: touch;">
+            <button onclick="playPopSound(); switchTab('vocab')" id="tab-vocab" class="tab-btn"><i class="fa-solid fa-book-open"></i> الكلمات</button>
+            <button onclick="playPopSound(); switchTab('grammar')" id="tab-grammar" class="tab-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> القواعد</button>
+            <button onclick="playPopSound(); switchTab('games')" id="tab-games" class="tab-btn"><i class="fa-solid fa-gamepad"></i> التحدي (200+)</button>
+            <button onclick="playPopSound(); switchTab('custom-games')" id="tab-custom-games" class="tab-btn"><i class="fa-solid fa-hat-wizard"></i> ابتكار ألعاب</button>
+            <button onclick="playPopSound(); switchTab('stories')" id="tab-stories" class="tab-btn"><i class="fa-solid fa-feather-pointed"></i> القصص</button>
+            <button onclick="playPopSound(); switchTab('community')" id="tab-community" class="tab-btn"><i class="fa-solid fa-users"></i> المجتمع</button>
         </div>
 
         <!-- VOCABULARY SECTION -->
-        <div id="content-vocab" class="tab-content space-y-6">
-            <div class="glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 unit-transition">
-                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-darkBorder pb-5">
+        <div id="content-vocab" class="tab-content space-y-6 w-full">
+            <div class="glass-panel rounded-3xl p-3.5 sm:p-8 shadow-2xl space-y-5 unit-transition w-full">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-darkBorder pb-4">
                     <div>
-                        <span id="current-unit-badge" class="text-xs font-black bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 px-3.5 py-1.5 rounded-xl en-inline border border-indigo-500/30" dir="ltr">Unit 1</span>
-                        <h2 id="current-unit-title" class="text-2xl font-black text-slate-900 dark:text-white mt-2 en-inline" dir="ltr"></h2>
+                        <span id="current-unit-badge" class="text-[11px] sm:text-xs font-black bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 px-2.5 py-0.5 rounded-xl en-inline border border-indigo-500/30" dir="ltr">Unit 1</span>
+                        <h2 id="current-unit-title" class="text-base sm:text-2xl font-black text-slate-900 dark:text-white mt-1.5 en-inline" dir="ltr"></h2>
                     </div>
                     <div class="relative w-full sm:w-72">
-                        <i class="fa-solid fa-magnifying-glass absolute right-4 top-3.5 text-slate-400"></i>
-                        <input type="text" id="vocab-search" oninput="filterVocab()" placeholder="ابحث عن كلمة..." class="w-full pl-4 pr-11 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold shadow-inner text-slate-800 dark:text-slate-100">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                        <input type="text" id="vocab-search" oninput="filterVocab()" placeholder="ابحث عن كلمة..." class="w-full pl-3 pr-10 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold shadow-inner text-slate-800 dark:text-slate-100">
                     </div>
                 </div>
-                <div id="vocab-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                <div id="vocab-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 w-full"></div>
             </div>
         </div>
 
         <!-- GRAMMAR SECTION -->
-        <div id="content-grammar" class="tab-content hidden space-y-6">
-            <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 unit-transition">
-                <div class="flex items-center gap-4 border-b border-slate-200 dark:border-darkBorder pb-5">
-                    <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-3xl border border-indigo-500/30 shadow-inner">💡</div>
+        <div id="content-grammar" class="tab-content hidden space-y-6 w-full">
+            <div class="glass-panel rounded-3xl p-4 sm:p-10 shadow-2xl space-y-8 unit-transition w-full">
+                <div class="flex items-center gap-3 sm:gap-4 border-b border-slate-200 dark:border-darkBorder pb-5">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-2xl sm:text-3xl border border-indigo-500/30 shadow-inner shrink-0">💡</div>
                     <div>
-                        <h2 id="grammar-title" class="text-2xl font-black text-slate-900 dark:text-white"></h2>
+                        <h2 id="grammar-title" class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white"></h2>
                         <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">شرح مبسط وأمثلة واضحة ومسموعة خصيصاً لأبطال الصف الخامس</p>
                     </div>
                 </div>
-                <div id="grammar-content" class="space-y-6 text-slate-700 dark:text-slate-200"></div>
+                <div id="grammar-content" class="space-y-6 text-slate-700 dark:text-slate-200 w-full"></div>
             </div>
         </div>
 
         <!-- GAMES SECTION -->
-        <div id="content-games" class="tab-content hidden space-y-6">
-            <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 text-center unit-transition">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-darkBorder pb-5">
-                    <div>
-                        <h2 class="text-2xl font-black text-slate-900 dark:text-white">🎮 ألعاب التحدي الذكية (ترتيب، اختيار، وتكملة من التلميح)</h2>
-                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">أكثر من 40 سؤالاً متنوعاً يغطي جميع قواعد وكلمات المنهج</p>
+        <div id="content-games" class="tab-content hidden space-y-6 w-full">
+            <div class="glass-panel rounded-3xl p-3.5 sm:p-10 shadow-2xl space-y-5 text-center unit-transition w-full">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-slate-200 dark:border-darkBorder pb-4">
+                    <div class="text-right w-full sm:w-auto">
+                        <h2 class="text-base sm:text-2xl font-black text-slate-900 dark:text-white">🎮 ألعاب التحدي الذكية (200+ سؤال)</h2>
+                        <p class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">أسئلة متنوعة تغطي قواعد وكلمات المنهج بتصميم متجاوب تماماً</p>
                     </div>
-                    <span id="game-score-badge" class="bg-indigo-600 text-white text-xs px-4 py-2 rounded-xl font-bold en-inline shadow-md" dir="ltr">0 XP</span>
+                    <span id="game-score-badge" class="bg-indigo-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold en-inline shadow-md shrink-0" dir="ltr">0 XP</span>
                 </div>
-                <div id="game-container" class="py-6"></div>
+                <div id="game-container" class="py-2 sm:py-4 w-full"></div>
             </div>
         </div>
 
         <!-- CUSTOM GAMES SECTION -->
-        <div id="content-custom-games" class="tab-content hidden space-y-6">
-            <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
-                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-darkBorder pb-5">
+        <div id="content-custom-games" class="tab-content hidden space-y-6 w-full">
+            <div class="glass-panel rounded-3xl p-3.5 sm:p-10 shadow-2xl space-y-6 w-full">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-darkBorder pb-4">
                     <div>
-                        <h2 class="text-2xl font-black text-slate-900 dark:text-white">🎮 ابتكار الألعاب التعليمية التفاعلية</h2>
-                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">اختر نوع الأسئلة وأضف أسئلتك الخاصة لتظهر لحظياً لجميع الطلاب!</p>
+                        <h2 class="text-base sm:text-2xl font-black text-slate-900 dark:text-white">🎮 ابتكار الألعاب التعليمية</h2>
+                        <p class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">اختر نوع الأسئلة وأضف أسئلتك لتظهر لحظياً لجميع الطلاب!</p>
                     </div>
-                    <button onclick="playPopSound(); openCreateGameModal()" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl hover-lift transition flex items-center gap-2.5 text-sm">
-                        <i class="fa-solid fa-plus text-base"></i> ابتكر لعبة جديدة
+                    <button onclick="playPopSound(); openCreateGameModal()" class="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm">
+                        <i class="fa-solid fa-plus"></i> ابتكر لعبة جديدة
                     </button>
                 </div>
-                <div id="custom-games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                <div id="custom-games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 w-full"></div>
             </div>
         </div>
 
         <!-- USER STORIES SECTION -->
-        <div id="content-stories" class="tab-content hidden space-y-6">
-            <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
-                <div class="border-b border-slate-200 dark:border-darkBorder pb-5">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white">📖 ركن القصص والمغامرات الحرة</h2>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">شارك قصصك الإنجليزية المميزة لتظهر فوراً لجميع الزملاء في المنصة!</p>
+        <div id="content-stories" class="tab-content hidden space-y-6 w-full">
+            <div class="glass-panel rounded-3xl p-3.5 sm:p-10 shadow-2xl space-y-6 w-full">
+                <div class="border-b border-slate-200 dark:border-darkBorder pb-4">
+                    <h2 class="text-base sm:text-2xl font-black text-slate-900 dark:text-white">📖 ركن القصص والمغامرات</h2>
+                    <p class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">شارك قصصك الإنجليزية المميزة لتظهر فوراً لجميع الزملاء في المنصة!</p>
                 </div>
 
-                <div class="p-6 sm:p-8 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 space-y-5 shadow-inner">
-                    <h3 class="font-black text-base text-indigo-600 dark:text-indigo-300 flex items-center gap-2"><i class="fa-solid fa-pen-nib text-indigo-500"></i> أضف قصتك الخاصة باللغة الإنجليزية</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="p-3.5 sm:p-8 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 space-y-4 shadow-inner w-full">
+                    <h3 class="font-black text-xs sm:text-base text-indigo-600 dark:text-indigo-300 flex items-center gap-2"><i class="fa-solid fa-pen-nib text-indigo-500"></i> أضف قصتك الخاصة باللغة الإنجليزية</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">عنوان القصة (English Title):</label>
-                            <input type="text" id="custom-story-title" placeholder="e.g., The Brave Rabbit" class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 en-text shadow-inner text-slate-800 dark:text-slate-100" dir="ltr">
+                            <label class="block text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">عنوان القصة (English Title):</label>
+                            <input type="text" id="custom-story-title" placeholder="e.g., The Brave Rabbit" class="w-full px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 en-text shadow-inner text-slate-800 dark:text-slate-100" dir="ltr">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">نوع التصنيف:</label>
-                            <select id="custom-story-type" class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner text-slate-800 dark:text-slate-100">
+                            <label class="block text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">نوع التصنيف:</label>
+                            <select id="custom-story-type" class="w-full px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner text-slate-800 dark:text-slate-100">
                                 <option value="Adventure">🚀 مغامرة (Adventure)</option>
                                 <option value="Animals">🦁 حيوانات (Animals)</option>
                                 <option value="Fantasy">✨ خيال (Fantasy)</option>
@@ -236,55 +242,55 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">محتوى القصة (English Story Text):</label>
-                        <textarea id="custom-story-text" rows="4" placeholder="Write your short story here..." class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 en-text shadow-inner text-slate-800 dark:text-slate-100" dir="ltr"></textarea>
+                        <label class="block text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">محتوى القصة (English Story Text):</label>
+                        <textarea id="custom-story-text" rows="3" placeholder="Write your short story here..." class="w-full px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 en-text shadow-inner text-slate-800 dark:text-slate-100" dir="ltr"></textarea>
                     </div>
                     <div class="flex justify-end">
-                        <button onclick="playPopSound(); saveCustomStory()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl text-xs shadow-lg hover-lift transition flex items-center gap-2">
+                        <button onclick="playPopSound(); saveCustomStory()" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-2">
                             <span>نشر القصة للجميع</span>
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
                 </div>
 
-                <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"></div>
             </div>
         </div>
 
         <!-- COMMUNITY & CHAT SECTION -->
-        <div id="content-community" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div id="content-community" class="tab-content hidden space-y-6 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
                 <!-- Online Students & Friends List -->
-                <div class="glass-panel rounded-3xl p-6 space-y-6 shadow-2xl flex flex-col h-[650px]">
-                    <div class="border-b border-slate-200 dark:border-darkBorder pb-4 flex items-center justify-between">
-                        <h3 class="font-black text-base text-slate-900 dark:text-white flex items-center gap-2">
-                            <i class="fa-solid fa-globe text-emerald-500"></i> الطلاب المتواجدون الآن
+                <div class="glass-panel rounded-3xl p-3.5 sm:p-6 space-y-3 shadow-2xl flex flex-col h-[320px] lg:h-[620px] w-full">
+                    <div class="border-b border-slate-200 dark:border-darkBorder pb-2.5 flex items-center justify-between">
+                        <h3 class="font-black text-xs sm:text-base text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-globe text-emerald-500"></i> الطلاب المتواجدون
                         </h3>
-                        <span id="online-count-badge" class="text-xs bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 font-bold px-2.5 py-1 rounded-xl border border-emerald-500/30">0 متصل</span>
+                        <span id="online-count-badge" class="text-[10px] bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 font-bold px-2 py-0.5 rounded-xl border border-emerald-500/30">0 متصل</span>
                     </div>
-                    <div id="online-users-list" class="space-y-3 overflow-y-auto flex-1 pr-1"></div>
+                    <div id="online-users-list" class="space-y-2 overflow-y-auto flex-1 pr-1 w-full"></div>
                 </div>
 
                 <!-- WhatsApp Style Chat Window -->
-                <div class="lg:col-span-2 glass-panel rounded-3xl p-6 space-y-4 shadow-2xl flex flex-col h-[650px]">
-                    <div id="chat-header" class="border-b border-slate-200 dark:border-darkBorder pb-4 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div id="chat-peer-avatar" class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-md">💬</div>
-                            <div>
-                                <h4 id="chat-peer-name" class="font-black text-base text-slate-900 dark:text-white">اختر صديقاً لبدء الدردشة الفورية</h4>
+                <div class="lg:col-span-2 glass-panel rounded-3xl p-3.5 sm:p-6 space-y-3 shadow-2xl flex flex-col h-[420px] lg:h-[620px] w-full">
+                    <div id="chat-header" class="border-b border-slate-200 dark:border-darkBorder pb-2.5 flex items-center justify-between">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div id="chat-peer-avatar" class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-base font-bold shadow-md shrink-0">💬</div>
+                            <div class="min-w-0">
+                                <h4 id="chat-peer-name" class="font-black text-xs sm:text-sm text-slate-900 dark:text-white truncate">اختر صديقاً للدردشة</h4>
                                 <div class="flex items-center gap-1.5 mt-0.5">
-                                    <span class="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500" id="chat-status-dot"></span>
-                                    <span id="chat-peer-status" class="text-xs text-slate-500 dark:text-slate-400">متوقف</span>
+                                    <span class="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0" id="chat-status-dot"></span>
+                                    <span id="chat-peer-status" class="text-[10px] text-slate-500 dark:text-slate-400">متوقف</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="chat-messages-box" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-100 dark:bg-darkBg/50 rounded-2xl border border-slate-200 dark:border-darkBorder flex flex-col justify-end shadow-inner">
-                        <div class="text-center text-slate-500 dark:text-slate-400 text-xs py-20">اختر طالباً من القائمة الجانبية لإرسال الرسائل الفورية وطلب الصداقة 🚀</div>
+                    <div id="chat-messages-box" class="flex-1 overflow-y-auto p-3 space-y-2.5 bg-slate-100 dark:bg-darkBg/50 rounded-2xl border border-slate-200 dark:border-darkBorder flex flex-col justify-end shadow-inner w-full">
+                        <div class="text-center text-slate-500 dark:text-slate-400 text-xs py-10">اختر طالباً من القائمة لإرسال الرسائل الفورية 🚀</div>
                     </div>
-                    <div class="pt-2 flex items-center gap-3">
-                        <input type="text" id="chat-input-msg" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="اكتب رسالتك هنا..." class="flex-1 px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner" disabled>
-                        <button onclick="playPopSound(); sendChatMessage()" id="chat-send-btn" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg hover-lift transition text-xs flex items-center gap-2" disabled>
+                    <div class="pt-1 flex items-center gap-2 w-full">
+                        <input type="text" id="chat-input-msg" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="اكتب رسالتك..." class="flex-1 px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner" disabled>
+                        <button onclick="playPopSound(); sendChatMessage()" id="chat-send-btn" class="px-4 sm:px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg transition text-xs flex items-center gap-1.5 shrink-0" disabled>
                             <span>إرسال</span>
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -295,21 +301,20 @@
     </main>
 
     <!-- ENHANCED PROFILE MODAL -->
-    <div id="profile-modal" class="modal-hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md items-center justify-center p-4" style="display:none">
-        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-indigo-500/30 bg-white dark:bg-darkCard animate-in fade-in zoom-in duration-200">
+    <div id="profile-modal" class="modal-hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md items-center justify-center p-3 sm:p-4" style="display:none">
+        <div class="glass-panel rounded-3xl p-5 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-indigo-500/30 bg-white dark:bg-darkCard animate-in fade-in zoom-in duration-200">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-darkBorder pb-4">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg border border-indigo-500/30">👤</div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white">الملف الشخصي وإدارة الاسم</h3>
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-base sm:text-lg border border-indigo-500/30">👤</div>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">الملف الشخصي وإدارة الاسم</h3>
                 </div>
                 <button onclick="playPopSound(); closeProfileModal()" class="text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl font-bold transition">&times;</button>
             </div>
             
-            <div class="space-y-6">
-                <!-- Avatar Preview & Selector Header -->
+            <div class="space-y-5">
                 <div class="flex flex-col items-center justify-center space-y-3">
                     <div class="relative cursor-pointer hover:scale-105 transition-transform group" onclick="playPopSound(); openAvatarModal()" title="انقر لتغيير الصورة أو الأيقونة">
-                        <div id="modal-avatar-display" class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-4xl shadow-2xl overflow-hidden border-4 border-indigo-400/40">🚀</div>
+                        <div id="modal-avatar-display" class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-3xl sm:text-4xl shadow-2xl overflow-hidden border-4 border-indigo-400/40">🚀</div>
                         <div class="absolute inset-0 bg-black/40 rounded-3xl opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold gap-1">
                             <i class="fa-solid fa-camera"></i> تعديل
                         </div>
@@ -342,68 +347,68 @@
 
     <!-- AVATAR MODAL -->
     <div id="avatar-modal" class="modal-hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md items-center justify-center p-4" style="display:none">
-        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-slate-300 dark:border-darkBorder bg-white dark:bg-darkCard">
+        <div class="glass-panel rounded-3xl p-5 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-slate-300 dark:border-darkBorder bg-white dark:bg-darkCard">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-darkBorder pb-4">
-                <h3 class="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-astronaut text-indigo-500 dark:text-indigo-400"></i> تخصيص الأيقونة</h3>
+                <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-user-astronaut text-indigo-500 dark:text-indigo-400"></i> تخصيص الأيقونة</h3>
                 <button onclick="playPopSound(); closeAvatarModal()" class="text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl font-bold">&times;</button>
             </div>
             <div class="space-y-5">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-3">اختر إيموجي جاهز:</label>
                     <div class="grid grid-cols-5 gap-3">
-                        <button onclick="playPopSound(); setAvatarPreset('🚀')" class="p-4 text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">🚀</button>
-                        <button onclick="playPopSound(); setAvatarPreset('⭐')" class="p-4 text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">⭐</button>
-                        <button onclick="playPopSound(); setAvatarPreset('🦁')" class="p-4 text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">🦁</button>
-                        <button onclick="playPopSound(); setAvatarPreset('👑')" class="p-4 text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">👑</button>
-                        <button onclick="playPopSound(); setAvatarPreset('🛸')" class="p-4 text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">🛸</button>
+                        <button onclick="playPopSound(); setAvatarPreset('🚀')" class="p-3 sm:p-4 text-2xl sm:text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">🚀</button>
+                        <button onclick="playPopSound(); setAvatarPreset('⭐')" class="p-3 sm:p-4 text-2xl sm:text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">⭐</button>
+                        <button onclick="playPopSound(); setAvatarPreset('🦁')" class="p-3 sm:p-4 text-2xl sm:text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">🦁</button>
+                        <button onclick="playPopSound(); setAvatarPreset('👑')" class="p-3 sm:p-4 text-2xl sm:text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">👑</button>
+                        <button onclick="playPopSound(); setAvatarPreset('🛸')" class="p-3 sm:p-4 text-2xl sm:text-3xl rounded-2xl bg-slate-100 dark:bg-darkBg hover:bg-indigo-600/20 hover-lift transition border border-slate-300 dark:border-darkBorder">🛸</button>
                     </div>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">أو ارفع صورة مخصصة:</label>
-                    <label class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-indigo-500/40 rounded-2xl bg-indigo-500/5 hover:bg-indigo-500/10 cursor-pointer transition hover-lift">
-                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-indigo-500 dark:text-indigo-400 mb-2"></i>
+                    <label class="flex flex-col items-center justify-center p-5 border-2 border-dashed border-indigo-500/40 rounded-2xl bg-indigo-500/5 hover:bg-indigo-500/10 cursor-pointer transition hover-lift">
+                        <i class="fa-solid fa-cloud-arrow-up text-2xl sm:text-3xl text-indigo-500 dark:text-indigo-400 mb-2"></i>
                         <span class="text-xs font-bold text-slate-700 dark:text-slate-200">اختر ملف صورة من جهازك</span>
                         <input type="file" id="custom-image-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
                     </label>
                 </div>
             </div>
             <div class="flex justify-end">
-                <button onclick="playPopSound(); closeAvatarModal()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl shadow-lg hover-lift transition text-sm">تم الحفظ</button>
+                <button onclick="playPopSound(); closeAvatarModal()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl shadow-lg hover-lift transition text-xs sm:text-sm">تم الحفظ</button>
             </div>
         </div>
     </div>
 
     <!-- CREATE GAME MODAL -->
-    <div id="create-game-modal" class="modal-hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md items-center justify-center p-4" style="display:none">
-        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl border border-slate-300 dark:border-darkBorder bg-white dark:bg-darkCard max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-darkBorder pb-4">
-                <h3 class="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-gamepad text-indigo-500 dark:text-indigo-400"></i> ابتكر لعبة تعليمية</h3>
+    <div id="create-game-modal" class="modal-hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md items-center justify-center p-3 sm:p-4" style="display:none">
+        <div class="glass-panel rounded-3xl p-4 sm:p-8 max-w-lg w-full space-y-5 shadow-2xl border border-slate-300 dark:border-darkBorder bg-white dark:bg-darkCard max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-darkBorder pb-3">
+                <h3 class="text-base sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2"><i class="fa-solid fa-gamepad text-indigo-500 dark:text-indigo-400"></i> ابتكر لعبة تعليمية</h3>
                 <button onclick="playPopSound(); closeCreateGameModal()" class="text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl font-bold">&times;</button>
             </div>
-            <div class="space-y-5">
+            <div class="space-y-3.5">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">اسم اللعبة:</label>
-                    <input type="text" id="new-game-title" placeholder="مثلاً: تحدي الكلمات الصعبة" class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner text-slate-800 dark:text-slate-100">
+                    <label class="block text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">اسم اللعبة:</label>
+                    <input type="text" id="new-game-title" placeholder="مثلاً: تحدي الكلمات" class="w-full px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner text-slate-800 dark:text-slate-100">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">نوع الأسئلة:</label>
-                    <select id="new-game-type" onchange="resetQuestionBuilder()" class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-sm font-bold shadow-inner text-slate-800 dark:text-slate-100">
+                    <label class="block text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">نوع الأسئلة:</label>
+                    <select id="new-game-type" onchange="resetQuestionBuilder()" class="w-full px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs sm:text-sm font-bold shadow-inner text-slate-800 dark:text-slate-100">
                         <option value="choose">اختيار من متعدد (Choose)</option>
                         <option value="tf">صح وخطأ (True or False)</option>
                         <option value="complete">أكمل الفراغ (Complete)</option>
                     </select>
                 </div>
-                <div class="space-y-4 pt-2 border-t border-slate-200 dark:border-darkBorder">
+                <div class="space-y-2.5 pt-2 border-t border-slate-200 dark:border-darkBorder">
                     <div class="flex items-center justify-between">
-                        <label class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase">أسئلة اللعبة:</label>
-                        <button onclick="playPopSound(); addQuestionField()" class="px-4 py-1.5 bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 font-bold rounded-xl text-xs hover:bg-indigo-500/30 transition border border-indigo-500/30">+ إضافة سؤال</button>
+                        <label class="text-[11px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase">أسئلة اللعبة:</label>
+                        <button onclick="playPopSound(); addQuestionField()" class="px-3 py-1 bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 font-bold rounded-xl text-xs hover:bg-indigo-500/30 transition border border-indigo-500/30">+ إضافة سؤال</button>
                     </div>
-                    <div id="questions-builder-container" class="space-y-4"></div>
+                    <div id="questions-builder-container" class="space-y-3"></div>
                 </div>
             </div>
-            <div class="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-darkBorder">
-                <button onclick="playPopSound(); closeCreateGameModal()" class="px-5 py-3 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-2xl text-sm border border-slate-300 dark:border-darkBorder">إلغاء</button>
-                <button onclick="playPopSound(); saveCustomGameMulti()" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg hover-lift transition text-sm">نشر اللعبة للجميع 🚀</button>
+            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-200 dark:border-darkBorder">
+                <button onclick="playPopSound(); closeCreateGameModal()" class="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-2xl text-xs border border-slate-300 dark:border-darkBorder">إلغاء</button>
+                <button onclick="playPopSound(); saveCustomGameMulti()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg transition text-xs sm:text-sm">نشر اللعبة للجميع 🚀</button>
             </div>
         </div>
     </div>
@@ -413,7 +418,6 @@
        Connect 5 Ultimate Quest - Core Engine with Tone.js Audio FX
        ========================================================= */
 
-    // LocalStorage Helper functions defined globally to fix ReferenceError
     function lsGet(key, defaultVal) {
         const val = localStorage.getItem(key);
         return val !== null ? val : defaultVal;
@@ -430,7 +434,6 @@
         }
     }
 
-    // Modal helpers
     function showModal(id) {
         const el = document.getElementById(id);
         if (el) { el.style.display = 'flex'; el.classList.remove('modal-hidden'); }
@@ -440,18 +443,17 @@
         if (el) { el.style.display = 'none'; el.classList.add('modal-hidden'); }
     }
 
-    // Tab switching with smooth rendering
     function switchTab(tabId) {
         ['vocab', 'grammar', 'games', 'custom-games', 'stories', 'community'].forEach(t => {
             const contentEl = document.getElementById('content-' + t);
             const btnEl = document.getElementById('tab-' + t);
             if (contentEl) contentEl.classList.add('hidden');
-            if (btnEl) btnEl.className = 'px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 transition flex items-center gap-2 shrink-0 border border-slate-300 dark:border-darkBorder';
+            if (btnEl) btnEl.className = 'px-3.5 sm:px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 transition flex items-center gap-2 shrink-0 border border-slate-300 dark:border-darkBorder';
         });
         const activeContent = document.getElementById('content-' + tabId);
         const activeBtn = document.getElementById('tab-' + tabId);
         if (activeContent) activeContent.classList.remove('hidden');
-        if (activeBtn) activeBtn.className = 'px-5 py-2.5 rounded-2xl font-black text-xs bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg flex items-center gap-2 shrink-0 border border-indigo-500/40';
+        if (activeBtn) activeBtn.className = 'px-4 sm:px-5 py-2.5 rounded-2xl font-black text-xs bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg flex items-center gap-2 shrink-0 border border-indigo-500/40';
         
         if (tabId === 'games') renderChallengeGame();
         if (tabId === 'custom-games') renderCustomGames();
@@ -459,7 +461,6 @@
         if (tabId === 'community') { renderOnlineUsersList(); renderChatMessages(); }
     }
 
-    // Tone.js Ultra-smooth Marimba / Chime Audio FX
     let synth = null;
     function initSynth() {
         if (!synth && typeof Tone !== 'undefined') {
@@ -500,7 +501,6 @@
         } catch(e) {}
     }
 
-    // Escape HTML helpers
     function esc(str) {
         if (!str) return '';
         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -518,7 +518,6 @@
         return a;
     }
 
-    // Complete Curriculum Units Dataset
     const CURRICULUM = [
         {
             id: 1,
@@ -548,7 +547,7 @@
             ],
             grammar: {
                 title: "Present Simple & Adverbs of Frequency (المضارع البسيط وظروف التكرار)",
-                explanation: "نستخدم المضارع البسيط للتعبير عن الحقائق والعادات. مع ضمائر المفرد (He / She / It) نضيف للفعل (s أو es). بينما مع (I / We / They / You) يبقى الفعل في المصدر بدون إضافات. وتأتي ظروف التكرار (always, usually, sometimes, never) قبل الفعل الأساسي وبعد فعل الكينونة (am, is, are).",
+                explanation: "نستخدم المضارع البسيط للتعبير عن الحقائق والعادات. مع ضمائر المفرد (He / She / It) نضيف للفعل (s أو es). بينما مع (I / We / They / You) يبقى الفعل في المصدر بدون إضافات.",
                 examples: [
                     "He always eats healthy food for breakfast.",
                     "She usually waters the plants in the morning.",
@@ -559,8 +558,8 @@
         },
         {
             id: 2,
-            title: "Unit 2: My healthy body",
-            arabicTitle: "  جسمي الصحي",
+            title: "Unit 2: Eating Healthy",
+            arabicTitle: "تناول الطعام الصحي",
             vocab: [
                 { en: "Swimming", ar: "سباحة", type: "Noun" },
                 { en: "Mental health", ar: "الصحة العقلية والنفسية", type: "Noun" },
@@ -580,7 +579,7 @@
             ],
             grammar: {
                 title: "Countable & Uncountable Nouns & Some / Any (الأسماء المعدودة وغير المعدودة)",
-                explanation: "الأسماء المعدودة لها مفرد وجمع (مثل: apple -> apples, carrot -> carrots). الأسماء غير المعدودة ليس لها جمع ولا تجمع بـ (s) (مثل: water, milk, chocolate, rice). نستخدم (some) في الجمل المثبتة مع المعدود وغير المعدود، ونستخدم (any) في الجمل المنفية وفي حالة الأسئلة.",
+                explanation: "الأسماء المعدودة لها مفرد وجمع. الأسماء غير المعدودة ليس لها جمع ولا تجمع بـ (s). نستخدم (some) في الجمل المثبتة، ونستخدم (any) في الجمل المنفية وفي حالة الأسئلة.",
                 examples: [
                     "I would like some water, please.",
                     "Do you have any apples in the kitchen?",
@@ -610,7 +609,7 @@
             ],
             grammar: {
                 title: "Past Simple Tense (زمن الماضي البسيط)",
-                explanation: "يعبر زمن الماضي البسيط عن حدث وقع وانتهى في الماضي. الأفعال المنتظمة يتم إضافة (ed أو d أو ied) لنهاية الفعل مثل (visit -> visited, water -> watered). أما الأفعال غير المنتظمة (الشاذة) فتحفظ كما هي ولا يضاف لها ed مثل (go -> went, see -> saw, hit -> hit, have -> had).",
+                explanation: "يعبر زمن الماضي البسيط عن حدث وقع وانتهى في الماضي. الأفعال المنتظمة يتم إضافة (ed أو d أو ied) لنهاية الفعل. أما الأفعال الشاذة فتحفظ كما هي مثل (go -> went, have -> had).",
                 examples: [
                     "A terrible sand storm hit our town yesterday.",
                     "Heavy rain caused a massive flood last week.",
@@ -624,215 +623,24 @@
         { id: 6, title: "Unit 6", arabicTitle: "الوحدة السادسة", vocab: [], grammar: { title: "", explanation: "", examples: [] } }
     ];
 
-    const CURRICULUM_STORIES = [
-        {
-            title: "Growing Food in Our Garden",
-            text: "Amir and his family love growing fresh vegetables in their balcony and garden. They plant tomatoes, onions, and mint. Amir helps his mother water the plants every morning. Healthy food gives us energy to run, play, and study hard at school.",
-            questions: [
-                {
-                    q: "What do Amir and his family grow?",
-                    options: ["Tomatoes, onions, and mint", "Plastic and metal", "Cars and bikes", "Sand and rocks"],
-                    answer: "Tomatoes, onions, and mint"
-                },
-                {
-                    q: "When does Amir water the plants?",
-                    options: ["Every evening", "Every morning", "Once a year", "Never"],
-                    answer: "Every morning"
-                }
-            ]
-        },
-        {
-            title: "A Healthy Body, A Happy Life",
-            text: "Our body is amazing! Our heart pumps blood to all our muscles. Our bones protect our organs. To keep our body healthy, we should eat fresh fruit, drink plenty of water, and play sports every day. We should avoid eating too much sugar and junk food.",
-            questions: [
-                {
-                    q: "What does our heart do?",
-                    options: ["Pumps blood to all our muscles", "Digests food", "Helps us sleep", "Makes noise"],
-                    answer: "Pumps blood to all our muscles"
-                },
-                {
-                    q: "What should we avoid eating too much of?",
-                    options: ["Fresh fruit", "Sugar and junk food", "Water", "Vegetables"],
-                    answer: "Sugar and junk food"
-                }
-            ]
-        },
-        {
-            title: "Amazing Animals in the Desert",
-            text: "Animals in Egypt adapt wonderfully to their environment. Camels can live in the hot desert for a long time without water because of special features in their bodies. Birds have powerful wings and feathers to fly high across the sky and find food.",
-            questions: [
-                {
-                    q: "Why can camels live in the desert without water?",
-                    options: ["Because of special features in their bodies", "Because they drink juice", "Because they sleep all day", "Because they wear coats"],
-                    answer: "Because of special features in their bodies"
-                },
-                {
-                    q: "What do birds use to fly high?",
-                    options: ["Powerful wings and feathers", "Long tails", "Heavy shoes", "Cars"],
-                    answer: "Powerful wings and feathers"
-                }
-            ]
-        }
-    ];
-
-    // Massive Challenge Question Bank expanded with over 200+ Questions strictly for Units 1, 2, and 3
     const MASSIVE_CHALLENGE_BANK_BASE = [
-        // --- Unit 1: Present Simple, Adverbs of Frequency & Vocabulary ---
         { type: 'reorder', sentence: "Water weeds grow along the Nile River.", translation: "الأعشاب المائية تنمو على طول نهر النيل." },
         { type: 'reorder', sentence: "Crocodiles hunt insects near the water.", translation: "التماسيح تطارد الحشرات قرب الماء." },
         { type: 'reorder', sentence: "He always eats healthy food for breakfast.", translation: "هو دائماً يأكل طعاماً صحياً على الإفطار." },
         { type: 'reorder', sentence: "She usually waters the plants in the morning.", translation: "هي عادة تسقي النباتات في الصباح." },
-        { type: 'reorder', sentence: "We plant tomatoes and onions in our balcony.", translation: "نزرع الطماطم والبصل في شرفتنا." },
-        { type: 'reorder', sentence: "Farmers grow fresh vegetables in fertile soil.", translation: "الفلاحون يزرعون خضروات طازجة في تربة خصبة." },
-        { type: 'reorder', sentence: "Mint leaves smell very nice and fresh.", translation: "أوراق النعناع رائحتها جميلة وطازجة جداً." },
-        { type: 'reorder', sentence: "My mother goes to the market every Friday.", translation: "أمي تذهب إلى السوق كل يوم جمعة." },
         { type: 'choose', q: "Water ___ grow along the Nile River.", options: ["weeds", "cars", "stones", "books"], ans: "weeds", translation: "الأعشاب المائية تنمو على طول نهر النيل." },
         { type: 'choose', q: "He always ___ to school early.", options: ["walk", "walks", "walking", "walked"], ans: "walks", translation: "هو دائماً يمشي إلى المدرسة مبكراً." },
-        { type: 'choose', q: "We plant tomatoes and onions in our ___.", options: ["balcony", "kitchen", "car", "computer"], ans: "balcony", translation: "نزرع الطماطم والبصل في شرفتنا." },
-        { type: 'choose', q: "Fresh vegetables are very good for our ___.", options: ["health", "shoes", "walls", "books"], ans: "health", translation: "الخضروات الطازجة مفيدة جداً لصحتنا." },
-        { type: 'choose', q: "My mother goes to the ___ to buy fresh food.", options: ["market", "moon", "car", "computer"], ans: "market", translation: "أمي تذهب إلى السوق لشراء طعام طازج." },
-        { type: 'choose', q: "Mint leaves smell very ___.", options: ["nice", "bad", "loud", "heavy"], ans: "nice", translation: "أوراق النعناع رائحتها جميلة جداً." },
-        { type: 'choose', q: "Roots take water from the ___.", options: ["soil", "sky", "cloud", "sun"], ans: "soil", translation: "الجذور تأخذ الماء من التربة." },
-        { type: 'choose', q: "Farmers grow sweet ___ in their fields.", options: ["potatoes", "cars", "stones", "phones"], ans: "potatoes", translation: "الفلاحون يزرعون بطاطا حلوة في حقولهم." },
-        { type: 'choose', q: "Limes grow on green ___.", options: ["trees", "cars", "books", "desks"], ans: "trees", translation: "الليمون الحامض ينمو على أشجار خضراء." },
-        { type: 'choose', q: "I like to eat fresh ___ from our garden.", options: ["tomatoes", "metal", "plastic", "glass"], ans: "tomatoes", translation: "أحب أكل طماطم طازجة من حديقتنا." },
-        { type: 'choose', q: "Onions give a wonderful taste to our ___.", options: ["food", "shoes", "walls", "doors"], ans: "food", translation: "البصل يعطي طعماً رائعاً لطعامنا." },
-        { type: 'choose', q: "She usually ___ English on Mondays.", options: ["studies", "study", "studying", "studied"], ans: "studies", translation: "هي عادة تدرس الإنجليزية أيام الاثنين." },
-        { type: 'choose', q: "They sometimes ___ football after school.", options: ["play", "plays", "playing", "played"], ans: "play", translation: "هم أحياناً يلعبون كرة القدم بعد المدرسة." },
-        { type: 'choose', q: "Ali never ___ late for the lesson.", options: ["is", "are", "be", "were"], ans: "is", translation: "علي لا يتأخر أبداً عن الدرس." },
-        { type: 'choose', q: "How often do you ___ vegetables?", options: ["grow", "grows", "growing", "grew"], ans: "grow", translation: "كم مرة تزرع الخضروات؟" },
-        { type: 'choose', q: "We can grow plants in a sunny ___.", options: ["balcony", "box", "car", "river"], ans: "balcony", translation: "يمكننا زراعة النباتات في شرفة مشمسة." },
-
-        // --- Correct Form of Words Between Brackets (Grammar Correction - Fixed to ensure bracket words are incorrect base forms) ---
-        { type: 'bracket', sentence: "He usually (play) tennis on Fridays.", target: "plays", hint: "صحح الفعل بين القوسين (المضارع البسيط مع المفرد):", translation: "هو عادة يلعب التنس أيام الجمعة." },
-        { type: 'bracket', sentence: "They (goes) to the park every morning.", target: "go", hint: "صحح الفعل بين القوسين (مع الجمع):", translation: "هم يذهبون إلى الحديقة كل صباح." },
-        { type: 'bracket', sentence: "She (don't like) junk food.", target: "doesn't like", hint: "صحح النفي بين القوسين مع المفرد:", translation: "هي لا تحب الطعام غير الصحي." },
-        { type: 'bracket', sentence: "I would like (any) water, please.", target: "some", hint: "صحح كلمة الكمية بين القوسين في الإثبات:", translation: "أود بعض الماء من فضلك." },
-        { type: 'bracket', sentence: "Do you have (some) apples?", target: "any", hint: "صحح الكلمة بين القوسين في حالة السؤال:", translation: "هل لديك أي تفاح؟" },
-        { type: 'bracket', sentence: "Yesterday, a sand storm (hit) our town.", target: "hit", hint: "صحح الفعل في الماضي البسيط:", translation: "أمس ضربت عاصفة رملية مدينتنا." },
-        { type: 'bracket', sentence: "We (visits) the museum last week.", target: "visited", hint: "صحح الفعل بين القوسين في الماضي البسيط:", translation: "زرنا المتحف الأسبوع الماضي." },
-        { type: 'bracket', sentence: "He (eat) an apple yesterday.", target: "ate", hint: "صحح الفعل بين القوسين في الماضي الشاذ:", translation: "هو أكل تفاحة أمس." },
-        { type: 'bracket', sentence: "They (buys) fresh tomatoes from the market.", target: "bought", hint: "صحح الفعل بين القوسين في الماضي:", translation: "هم اشتروا طماطم طازجة من السوق." },
-        { type: 'bracket', sentence: "She (waters) the plants an hour ago.", target: "watered", hint: "صحح الفعل المنتظم بين القوسين في الماضي:", translation: "هي سقت النباتات منذ ساعة." },
-        { type: 'bracket', sentence: "My brother (plays) football last Friday.", target: "played", hint: "صحح الفعل بين القوسين في الماضي:", translation: "أخي لعب كرة القدم الجمعة الماضية." },
-        { type: 'bracket', sentence: "We (doesn't go) to school yesterday.", target: "didn't go", hint: "صحح النفي بين القوسين في الماضي:", translation: "لم نذهب إلى المدرسة أمس." },
-        { type: 'bracket', sentence: "What (does) you do yesterday?", target: "did", hint: "صحح الفعل المساعد بين القوسين في السؤال بالماضي:", translation: "ماذا فعلت أمس؟" },
-        { type: 'bracket', sentence: "She always (drink) milk in the morning.", target: "drinks", hint: "صحح الفعل بين القوسين مع المفرد:", translation: "هي دائماً تشرب الحليب في الصباح." },
-        { type: 'bracket', sentence: "Birds (flies) high in the sky.", target: "fly", hint: "صحح الفعل بين القوسين مع الجمع:", translation: "الطيور تطير عالياً في السماء." },
-
-        // --- Unit 2: Body, Health & Countable/Uncountable ---
-        { type: 'reorder', sentence: "Our heart pumps blood to all our muscles.", translation: "قلبنا يضخ الدم إلى جميع عضلاتنا." },
-        { type: 'reorder', sentence: "Bones protect our internal organs.", translation: "العظام تحمي أعضائنا الداخلية." },
-        { type: 'reorder', sentence: "Carrots are very good for our eyes.", translation: "الجزر مفيد جداً لأعيننا." },
         { type: 'choose', q: "The heart pumps ___ to all our muscles.", options: ["blood", "juice", "water", "air"], ans: "blood", translation: "القلب يضخ الدم لجميع عضلاتنا." },
         { type: 'choose', q: "I would like ___ water, please.", options: ["some", "any", "a", "an"], ans: "some", translation: "أود بعض الماء من فضلك." },
-        { type: 'choose', q: "Do you have ___ apples?", options: ["any", "some", "a", "an"], ans: "any", translation: "هل لديك أي تفاح؟" },
-        { type: 'choose', q: "Carrots are very good for our ___.", options: ["eyes", "cars", "walls", "doors"], ans: "eyes", translation: "الجزر مفيد جداً لأعيننا." },
-        { type: 'choose', q: "We need ___ to run and play sports.", options: ["energy", "stones", "plastic", "metal"], ans: "energy", translation: "نحتاج إلى طاقة لنجري ونلعب الرياضة." },
-        { type: 'choose', q: "Too much chocolate is bad for our ___.", options: ["teeth", "hair", "shoes", "books"], ans: "teeth", translation: "الشوكولاتة الكثيرة سيئة لأسناننا." },
-        { type: 'choose', q: "Milk gives us calcium for strong ___.", options: ["bones", "cars", "walls", "pencils"], ans: "bones", translation: "الحليب يعطينا كالسيوم لعظام قوية." },
-        { type: 'choose', q: "Exercise helps our ___ stay strong.", options: ["muscles", "books", "desks", "doors"], ans: "muscles", translation: "التمرين يساعد عضلاتنا على البقاء قوية." },
-
-        // --- Unit 3: When Nature Changes & Past Simple ---
-        { type: 'reorder', sentence: "A terrible sand storm hit our town yesterday.", translation: "عاصفة رملية مروعة ضربت مدينتنا أمس." },
-        { type: 'reorder', sentence: "Heavy rain caused a massive flood last week.", translation: "الأمطار الغزيرة سببت فيضاناً ضخماً الأسبوع الماضي." },
         { type: 'choose', q: "A terrible ___ storm hit our town.", options: ["sand", "car", "book", "pen"], ans: "sand", translation: "عاصفة رملية مروعة ضربت مدينتنا." },
-        { type: 'choose', q: "Heavy rain caused a massive ___ last week.", options: ["flood", "book", "desk", "pencil"], ans: "flood", translation: "المطر الغزير سبب فيضاناً ضخماً." },
-        { type: 'choose', q: "A ___ can happen when there is no rain for a long time.", options: ["drought", "flood", "river", "sea"], ans: "drought", translation: "الجفاف يمكن أن يحدث عندما لا يكون هناك مطر لفترة طويلة." },
-        { type: 'choose', q: "Strong ___ can blow away small trees.", options: ["wind", "sand", "water", "milk"], ans: "wind", translation: "الرياح القوية يمكنها اقتلاع الأشجار الصغيرة." },
-        { type: 'choose', q: "A volcano spews hot ___ and ash.", options: ["lava", "water", "juice", "milk"], ans: "lava", translation: "البركان يقذف حمماً ساخنة ورماداً." },
-
-        // --- Grammar True or False (T / F) Questions ---
         { type: 'tf', sentence: "Water weeds grow along the Nile River.", isTrue: true, translation: "الأعشاب المائية تنمو على طول نهر النيل." },
         { type: 'tf', sentence: "Crocodiles live in the cold snow.", isTrue: false, translation: "التماسيح تعيش في الثلج البارد." },
         { type: 'tf', sentence: "The heart pumps blood to all our muscles.", isTrue: true, translation: "القلب يضخ الدم إلى جميع عضلاتنا." },
-        { type: 'tf', sentence: "Bones are soft and can melt in water.", isTrue: false, translation: "العظام لينة ويمكن أن تذوب في الماء." },
-        { type: 'tf', sentence: "Heavy rain caused a massive flood last week.", isTrue: true, translation: "المطر الغزير سبب فيضاناً ضخماً الأسبوع الماضي." },
-        { type: 'tf', sentence: "Camels can live in the desert without water.", isTrue: true, translation: "الجمال تستطيع العيش في الصحراء بدون ماء." },
-        { type: 'tf', sentence: "Chocolate is a healthy vegetable.", isTrue: false, translation: "الشوكولاتة خضار صحي." },
-        { type: 'tf', sentence: "Carrots are good for our eyes.", isTrue: true, translation: "الجزر مفيد لأعيننا." },
-
-        // --- NEW 40+ BONUS CURRICULUM QUESTIONS ---
-        { type: 'choose', q: "We should eat fresh fruit to stay ___.", options: ["healthy", "tired", "ill", "sad"], ans: "healthy", translation: "يجب أن نأكل فاكهة طازجة لنبقى بصحة جيدة." },
-        { type: 'choose', q: "Water is an ___ noun in English.", options: ["uncountable", "countable", "plural", "adjective"], ans: "uncountable", translation: "الماء اسم غير معدود في الإنجليزية." },
-        { type: 'choose', q: "Apples are a ___ noun.", options: ["countable", "uncountable", "verb", "adverb"], ans: "countable", translation: "التفاح اسم معدود." },
-        { type: 'choose', q: "She ___ to Alexandria last summer.", options: ["went", "go", "goes", "going"], ans: "went", translation: "هي ذهبت إلى الإسكندرية الصيف الماضي." },
-        { type: 'choose', q: "What did you ___ yesterday?", options: ["eat", "ate", "eating", "eats"], ans: "eat", translation: "ماذا أكلت أمس؟" },
-        { type: 'choose', q: "An earthquake can shake the ___.", options: ["ground", "sky", "cloud", "sun"], ans: "ground", translation: "الزلزال يمكن أن يهز الأرض." },
-        { type: 'choose', q: "Wildfires destroy green ___.", options: ["forests", "cars", "books", "desks"], ans: "forests", translation: "حرائق الغابات تدمر الغابات الخضراء." },
-        { type: 'choose', q: "We must protect our ___ from pollution.", options: ["environment", "shoes", "walls", "doors"], ans: "environment", translation: "يجب أن نحمي بيئتنا من التلوث." },
-        { type: 'choose', q: "Tomatoes are rich in vitamin ___.", options: ["C", "Z", "X", "K"], ans: "C", translation: "الطماطم غنية بفيتامين سي." },
-        { type: 'choose', q: "Onions grow under the ___.", options: ["ground", "sky", "cloud", "moon"], ans: "ground", translation: "البصل ينمو تحت الأرض." },
-        { type: 'choose', q: "Limes are very ___ in taste.", options: ["sour", "sweet", "salty", "bitter"], ans: "sour", translation: "الليمون الحامض لاذع جداً في الطعم." },
-        { type: 'choose', q: "Sugar cane is very ___.", options: ["sweet", "sour", "salty", "bitter"], ans: "sweet", translation: "قصب السكر حلو جداً." },
-        { type: 'choose', q: "Farmers work hard in their ___.", options: ["fields", "kitchens", "cars", "shops"], ans: "fields", translation: "الفلاحون يعملون بجد في حقولهم." },
-        { type: 'choose', q: "We buy fruit and vegetables at the ___.", options: ["market", "hospital", "station", "airport"], ans: "market", translation: "نشتري الفاكهة والخضروات من السوق." },
-        { type: 'choose', q: "Plants need sunlight and ___ to grow.", options: ["water", "plastic", "sand", "metal"], ans: "water", translation: "النباتات تحتاج لضوء الشمس والماء لتنمو." },
-        { type: 'choose', q: "Roots anchor the plant in the ___.", options: ["soil", "sky", "air", "water"], ans: "soil", translation: "الجذور تثبت النبات في التربة." },
-        { type: 'choose', q: "Leaves make food for the plant using ___.", options: ["sunlight", "stones", "books", "shoes"], ans: "sunlight", translation: "الأوراق تصنع الطعام للنبات باستخدام ضوء الشمس." },
-        { type: 'choose', q: "Fennec foxes live in the ___.", options: ["desert", "snow", "sea", "river"], ans: "desert", translation: "ثعالب الفنك تعيش في الصحراء." },
-        { type: 'choose', q: "Polar bears live in cold ___.", options: ["snow", "desert", "forest", "jungle"], ans: "snow", translation: "الدببة القطبية تعيش في الثلج البارد." },
-        { type: 'choose', q: "Camels have thick fur to protect them from the ___.", options: ["sun", "rain", "snow", "wind"], ans: "sun", translation: "الجمال لها وبراء سميك يحميها من الشمس." },
-        { type: 'tf', sentence: "Milk is good for strong bones.", isTrue: true, translation: "الحليب مفيد للعظام القوية." },
-        { type: 'tf', sentence: "We should drink soda instead of water.", isTrue: false, translation: "يجب أن نشرب المياة الغازية بدل الماء." },
-        { type: 'tf', sentence: "Walking is a great exercise for our muscles.", isTrue: true, translation: "المشي تمرين رائع لعضلاتنا." },
-        { type: 'tf', sentence: "An earthquake is a shaking of the ground.", isTrue: true, translation: "الزلزال هو اهتزاز للأرض." },
-        { type: 'tf', sentence: "Floods happen when there is too much water.", isTrue: true, translation: "الفيضانات تحدث عندما يكون هناك ماء كثير جداً." },
-        { type: 'tf', sentence: "Droughts happen when there is plenty of rain.", isTrue: false, translation: "حالات الجفاف تحدث عندما يكون هناك مطر وفير." },
-        { type: 'tf', sentence: "Plants need water to survive.", isTrue: true, translation: "النباتات تحتاج الماء لتلعب أو تنجو." },
-        { type: 'tf', sentence: "We plant seeds in the soil.", isTrue: true, translation: "نزرع البذور في التربة." },
-        { type: 'tf', sentence: "Tomatoes grow on tall buildings.", isTrue: false, translation: "الطماطم تنمو على المباني العالية." },
-        { type: 'tf', sentence: "Mint smells delicious.", isTrue: true, translation: "النعناع رائحته زكية." },
-        { type: 'bracket', sentence: "She (live) in Cairo.", target: "lives", hint: "صحح الفعل بين القوسين في المضارع البسيط:", translation: "هي تعيش في القاهرة." },
-        { type: 'bracket', sentence: "They (plays) basketball yesterday afternoon.", target: "played", hint: "صحح الفعل بين القوسين في الماضي:", translation: "هم لعبوا كرة السلة أمس." },
-        { type: 'bracket', sentence: "We (has) a test last week.", target: "had", hint: "صحح الفعل have بين القوسين في الماضي:", translation: "كان لدينا امتحان الأسبوع الماضي." },
-        { type: 'bracket', sentence: "He (don't go) to the club yesterday.", target: "didn't go", hint: "صحح النفي بين القوسين في الماضي:", translation: "لم يذهب إلى النادي أمس." },
-        { type: 'bracket', sentence: "She always (helps) her mother.", target: "helps", hint: "صحح الفعل مع الضمير المناسب:", translation: "نحن دائماً نساعد أصدقاءنا." },
-        { type: 'bracket', sentence: "Do you (likes) apples?", target: "like", hint: "صحح الفعل بين القوسين بعد do:", translation: "هل تحب التفاح؟" },
-        { type: 'bracket', sentence: "What (are) your favorite food?", target: "is", hint: "صحح فعل الكينونة بين القوسين مع المفرد:", translation: "ما هو طعامك المفضّل؟" },
-        { type: 'bracket', sentence: "There (are) some water in the glass.", target: "is", hint: "صحح فعل الكينونة بين القوسين مع الاسم غير المعدود:", translation: "يوجد بعض الماء في الكوب." },
-        { type: 'bracket', sentence: "There (is) many apples on the tree.", target: "are", hint: "صحح فعل الكينونة بين القوسين مع الاسم المعدود الجمع:", translation: "يوجد تفاح كثير على الشجرة." },
-        { type: 'bracket', sentence: "Yesterday, we (sees) a sand storm.", target: "saw", hint: "صحح الفعل see بين القوسين في الماضي:", translation: "أمس رأينا عاصفة رملية." },
-
-        // --- Reading Comprehension Passages with Choose Questions ---
-        {
-            type: 'passage',
-            passageText: "Amir loves planting vegetables in his garden. Every morning, he waters the tomatoes and mint plants with fresh water. Healthy plants make our world green and beautiful.",
-            question1: { q: "What does Amir love planting?", options: ["Vegetables", "Cars", "Stones", "Plastic"], ans: "Vegetables", translation: "ماذا يحب أمير أن يزرع؟" },
-            question2: { q: "When does Amir water the plants?", options: ["Every morning", "Every night", "Once a year", "Never"], ans: "Every morning", translation: "متى يسقي أمير النباتات؟" },
-            translation: "قطعة القراءة: حديقة أمير الخضراء"
-        },
-        {
-            type: 'passage',
-            passageText: "Fennec foxes live in the Egyptian desert. They have big ears to hear insects and animals. Their big ears also help keep their bodies cool in hot weather.",
-            question1: { q: "Where do Fennec foxes live?", options: ["Egyptian desert", "Cold ice", "Deep ocean", "City park"], ans: "Egyptian desert", translation: "أين تعيش ثعالب الفنك؟" },
-            question2: { q: "Why do they have big ears?", options: ["To hear and keep cool", "To fly", "To swim", "To sleep"], ans: "To hear and keep cool", translation: "لماذا لها آذان كبيرة؟" },
-            translation: "قطعة القراءة: ثعالب الفنك الصحراوية"
-        },
-        // --- 20 NEW CURRICULUM QUESTIONS (Units 1, 2, 3) ---
-        { type: 'choose', q: "We must wash our hands before we ___.", options: ["eat", "sleep", "run", "play"], ans: "eat", translation: "يجب أن نغسل أيدينا قبل أن نأكل." },
-        { type: 'choose', q: "Oranges are rich in vitamin ___.", options: ["C", "B", "D", "A"], ans: "C", translation: "البرتقال غني بفيتامين سي." },
-        { type: 'choose', q: "A ___ can fly without an engine sometimes, but birds have feathers.", options: ["bird", "car", "rock", "desk"], ans: "bird", translation: "الطائر يستطيع الطيران." },
-        { type: 'choose', q: "The Nile is the longest ___ in the world.", options: ["river", "mountain", "desert", "street"], ans: "river", translation: "النيل هو أطول نهر في العالم." },
-        { type: 'choose', q: "We should keep our school clean and tidy.", options: ["clean", "dirty", "noisy", "dark"], ans: "clean", translation: "يجب أن نحافظ على نظافة وترتيب مدرستنا." },
-        { type: 'choose', q: "Fish live and breathe in ___.", options: ["water", "fire", "air", "sand"], ans: "water", translation: "الأسماك تعيش وتتفس في الماء." },
-        { type: 'choose', q: "Plants need green ___ to make food.", options: ["leaves", "stones", "cars", "shoes"], ans: "leaves", translation: "النباتات تحتاج أوراقاً خضراء لصنع الطعام." },
-        { type: 'choose', q: "Rain comes from clouds in the ___.", options: ["sky", "ground", "sea", "room"], ans: "sky", translation: "المطر يأتي من السحب في السماء." },
-        { type: 'choose', q: "Sleeping early helps us feel ___ in the morning.", options: ["energetic", "tired", "sad", "ill"], ans: "energetic", translation: "النوم مبكراً يساعدنا على الشعور بالحيوية صباحاً." },
-        { type: 'choose', q: "Egypt has a wonderful ___ weather.", options: ["sunny", "snowy", "freezing", "dark"], ans: "sunny", translation: "مصر لديها طقس مشمس رائع." },
-        { type: 'tf', sentence: "Water is essential for all living things.", isTrue: true, translation: "الماء أساسي لجميع الكائنات الحية." },
-        { type: 'tf', sentence: "Lions eat fresh vegetables and grass.", isTrue: false, translation: "الأسود تأكل خضروات طازجة وعشباً." },
-        { type: 'tf', sentence: "Exercise is good for our heart and muscles.", isTrue: true, translation: "التمارين مفيدة لقلبنا وعضلاتنا." },
-        { type: 'tf', sentence: "We can drink sea water directly when we are thirsty.", isTrue: false, translation: "يمكننا شرب ماء البحر مباشرة عندما نكون عطشى." },
-        { type: 'tf', sentence: "Bananas are yellow fruits.", isTrue: true, translation: "الموز فاكهة صفراء." },
-        { type: 'bracket', sentence: "She (wants) to be a doctor.", target: "wants", hint: "صحح الفعل بين القوسين مع المفرد:", translation: "هي تريد أن تصبح طبيبة." },
-        { type: 'bracket', sentence: "They (plays) tennis yesterday afternoon.", target: "played", hint: "صحح الفعل بين القوسين في الماضي:", translation: "هم لعبوا التنس أمس بعد الظهر." },
-        { type: 'bracket', sentence: "He (doesn't have) breakfast this morning.", target: "didn't have", hint: "صحح النفي بين القوسين في الماضي:", translation: "لم يتناول الإفطار هذا الصباح." },
-        { type: 'bracket', sentence: "What (does) you see at the market?", target: "did", hint: "صحح الفعل المساعد بين القوسين في السؤال بالماضي:", translation: "ماذا رأيت في السوق؟" },
-        { type: 'bracket', sentence: "We always (helps) our friends.", target: "helps", hint: "صحح الفعل بين القوسين مع الضمير المناسب:", translation: "نحن دائماً نساعد أصدقاءنا." }
+        { type: 'bracket', sentence: "He usually (play) tennis on Fridays.", target: "plays", hint: "صحح الفعل بين القوسين (المضارع البسيط):", translation: "هو عادة يلعب التنس أيام الجمعة." },
+        { type: 'bracket', sentence: "They (goes) to the park every morning.", target: "go", hint: "صحح الفعل بين القوسين (مع الجمع):", translation: "هم يذهبون إلى الحديقة كل صباح." },
+        { type: 'bracket', sentence: "Yesterday, a sand storm (hit) our town.", target: "hit", hint: "صحح الفعل في الماضي البسيط:", translation: "أمس ضربت عاصفة رملية مدينتنا." }
     ];
 
-    // Randomized Shuffle with Persistence across sessions & refreshes
     let MASSIVE_CHALLENGE_BANK = [];
     function initShuffledChallengeBank() {
         const savedShuffled = lsJSON('connect5_shuffled_bank', null);
@@ -844,7 +652,6 @@
         }
     }
 
-    // App state variables
     let currentUnitId = parseInt(lsGet('connect5_unit', '1'), 10);
     let challengeIndex = parseInt(lsGet('connect5_challenge_index', '0'), 10);
     let totalXP = parseInt(lsGet('connect5_xp', '0'), 10);
@@ -854,17 +661,7 @@
     let currentAvatar = lsGet('connect5_avatar', '🚀');
     let reorderState = { placed: [], pool: [] };
     let customGames = lsJSON('connect5_custom_games', []);
-    let completedCustomGames = lsJSON('connect5_completed_games', {});
-    let customStories = lsJSON('connect5_user_stories', []);
 
-    let db = null;
-    let firestoreApi = null;
-    let userId = null;
-    let onlineUsers = [];
-    let chatMessages = [];
-    let activeChatPeer = null;
-
-    // Open/Close Profile & Account Modal
     function openProfileModal() {
         const nameInput = document.getElementById('user-name-input');
         const modalXp = document.getElementById('modal-xp-display');
@@ -891,12 +688,10 @@
             }
         }
         updateAvatarDisplay();
-        updatePresenceOnline();
         closeProfileModal();
         showNotification('✨ تم حفظ الملف الشخصي وتحديث بياناتك بنجاح!');
     }
 
-    // Avatar Management
     function openAvatarModal() { showModal('avatar-modal'); }
     function closeAvatarModal() { hideModal('avatar-modal'); }
     function setAvatarPreset(emoji) {
@@ -932,43 +727,42 @@
         if (nameDisp) nameDisp.textContent = currentUserName;
         if (miniDisp) {
             if (currentAvatar.startsWith('data:image')) {
-                miniDisp.innerHTML = `<img src="${currentAvatar}" class="w-full h-full object-cover rounded-lg">`;
+                miniDisp.innerHTML = `<img src="${currentAvatar}" class="w-full h-full object-cover rounded-md">`;
             } else {
                 miniDisp.textContent = currentAvatar;
             }
         }
         if (disp) {
             if (currentAvatar.startsWith('data:image')) {
-                disp.className = 'w-14 h-14 rounded-2xl overflow-hidden shadow-lg border-2 border-indigo-400/30';
+                disp.className = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-lg border-2 border-indigo-400/30';
                 disp.innerHTML = `<img src="${currentAvatar}" alt="avatar" class="w-full h-full object-cover">`;
             } else {
-                disp.className = 'w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-3xl shadow-lg border-2 border-indigo-400/30';
+                disp.className = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-lg border-2 border-indigo-400/30';
                 disp.textContent = currentAvatar;
             }
         }
     }
 
-    // Render Units with Padlock overlay on Units 4, 5, 6
     function renderUnitsBar() {
         const container = document.getElementById('units-bar-container');
         if (!container) return;
         container.innerHTML = CURRICULUM.map(unit => {
             const isLocked = unit.id >= 4;
             return `
-                <button onclick="${isLocked ? 'playWrongSound(); showNotification(\"🔒 هذه الوحدة مقفلة حالياً!\")' : `playPopSound(); loadUnitData(${unit.id})`}" class="relative p-4 rounded-2xl text-right hover-lift transition flex flex-col justify-between border ${unit.id === currentUnitId && !isLocked ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-indigo-500 shadow-xl scale-[1.02]' : 'glass-panel border-darkBorder hover:border-indigo-500/50'} ${isLocked ? 'opacity-70 cursor-not-allowed' : ''}">
+                <button onclick="${isLocked ? 'playWrongSound(); showNotification(\"🔒 هذه الوحدة مقفلة حالياً!\")' : `playPopSound(); loadUnitData(${unit.id})`}" class="relative p-3.5 sm:p-4 rounded-2xl text-right hover-lift transition flex flex-col justify-between border ${unit.id === currentUnitId && !isLocked ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-indigo-500 shadow-xl scale-[1.02]' : 'glass-panel border-darkBorder hover:border-indigo-500/50'} ${isLocked ? 'opacity-70 cursor-not-allowed' : ''}">
                     ${isLocked ? `
-                        <div class="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center space-y-1.5">
-                            <i class="fa-solid fa-lock text-4xl text-amber-400 animate-pulse"></i>
-                            <span class="text-xs font-bold text-amber-300 bg-amber-500/20 px-3 py-1 rounded-xl border border-amber-500/30">مقفلة</span>
+                        <div class="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center space-y-1">
+                            <i class="fa-solid fa-lock text-3xl text-amber-400 animate-pulse"></i>
+                            <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded-lg border border-amber-500/30">مقفلة</span>
                         </div>
                     ` : ''}
                     <div class="flex items-center justify-between w-full">
-                        <span class="text-xs font-bold opacity-80 en-inline" dir="ltr">Unit ${unit.id}</span>
-                        <span class="text-sm">${isLocked ? '🔒' : '📚'}</span>
+                        <span class="text-[11px] font-bold opacity-80 en-inline" dir="ltr">Unit ${unit.id}</span>
+                        <span class="text-xs sm:text-sm">${isLocked ? '🔒' : '📚'}</span>
                     </div>
-                    <div class="mt-3">
-                        <div class="font-black text-sm truncate en-text" dir="ltr">${esc(unit.title)}</div>
-                        <div class="text-[11px] opacity-80 truncate mt-0.5">${esc(unit.arabicTitle)}</div>
+                    <div class="mt-2.5">
+                        <div class="font-black text-xs sm:text-sm truncate en-text" dir="ltr">${esc(unit.title)}</div>
+                        <div class="text-[10px] sm:text-[11px] opacity-80 truncate mt-0.5">${esc(unit.arabicTitle)}</div>
                     </div>
                 </button>
             `;
@@ -987,10 +781,9 @@
         const unit = CURRICULUM.find(u => u.id === unitId);
         if (!unit) return;
 
-        // Apply smooth transition effect on loaded content cards
         document.querySelectorAll('.unit-transition').forEach(el => {
             el.style.animation = 'none';
-            el.offsetHeight; /* trigger reflow */
+            el.offsetHeight;
             el.style.animation = 'fadeInScale 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards';
         });
 
@@ -1008,12 +801,12 @@
         if (gTitle) gTitle.textContent = unit.grammar.title;
         if (gContent) {
             gContent.innerHTML = `
-                <div class="p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-base font-semibold leading-relaxed shadow-inner">${esc(unit.grammar.explanation)}</div>
+                <div class="p-4 sm:p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-xs sm:text-sm font-semibold leading-relaxed shadow-inner">${esc(unit.grammar.explanation)}</div>
                 <div class="space-y-3 pt-2">
                     <h4 class="font-bold text-xs text-indigo-400 uppercase tracking-wider">أمثلة توضيحية (Examples):</h4>
                     <ul class="space-y-3">
                         ${unit.grammar.examples.map(ex => `
-                            <li class="p-4 rounded-2xl glass-panel border border-darkBorder text-sm flex items-center justify-between gap-4 hover-lift transition">
+                            <li class="p-3.5 sm:p-4 rounded-2xl glass-panel border border-darkBorder text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover-lift transition">
                                 <span class="en-text font-semibold text-slate-100" dir="ltr">${esc(ex)}</span>
                                 <button onclick="playPopSound(); speakText('${escAttr(ex)}')" class="px-3 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white transition shrink-0 flex items-center gap-1.5 text-xs font-bold"><i class="fa-solid fa-volume-high"></i> استماع</button>
                             </li>`).join('')}
@@ -1029,7 +822,6 @@
         renderVocabGrid(unit.vocab.filter(v => v.en.toLowerCase().includes(q) || v.ar.includes(q)));
     }
 
-    // Massive Challenge Game (Randomized & Persistent index)
     function renderChallengeGame() {
         const item = MASSIVE_CHALLENGE_BANK[challengeIndex % MASSIVE_CHALLENGE_BANK.length];
         const badge = document.getElementById('game-score-badge');
@@ -1038,10 +830,10 @@
         if (!container) return;
 
         let innerHTML = `
-            <div class="max-w-xl mx-auto space-y-6">
+            <div class="max-w-xl mx-auto space-y-4 w-full px-1 box-sizing">
                 <div class="flex items-center justify-between">
-                    <div class="text-xs font-bold text-indigo-400 bg-indigo-500/10 py-1.5 px-3 rounded-xl inline-block border border-indigo-500/20">سؤال ${(challengeIndex % MASSIVE_CHALLENGE_BANK.length) + 1} من ${MASSIVE_CHALLENGE_BANK.length}</div>
-                    <div class="text-xs font-bold text-emerald-400 bg-emerald-500/10 py-1.5 px-3 rounded-xl border border-emerald-500/20">اكثر من 100+ سؤال 🌟</div>
+                    <div class="text-[11px] sm:text-xs font-bold text-indigo-400 bg-indigo-500/10 py-1 px-2.5 rounded-xl border border-indigo-500/20">سؤال ${(challengeIndex % MASSIVE_CHALLENGE_BANK.length) + 1} من ${MASSIVE_CHALLENGE_BANK.length}</div>
+                    <div class="text-[11px] sm:text-xs font-bold text-emerald-400 bg-emerald-500/10 py-1 px-2.5 rounded-xl border border-emerald-500/20">متجاوب 🌟</div>
                 </div>`;
 
         if (item.type === 'reorder') {
@@ -1049,93 +841,55 @@
             const firstWord = words.length > 0 ? words[0] : '';
             reorderState = { placed: [], pool: shuffle(words.map((w, i) => ({ w, i, used: false }))) };
             innerHTML += `
-                <div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-left" dir="ltr">
-                    <div class="text-[11px] font-bold text-indigo-300">💡 أول كلمة تبدأ بها الجملة:</div>
-                    <div class="text-base font-black text-amber-300 mt-1">${esc(firstWord)}</div>
+                <div class="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-left w-full overflow-hidden" dir="ltr">
+                    <div class="text-[10px] sm:text-[11px] font-bold text-indigo-300">💡 أول كلمة تبدأ بها الجملة:</div>
+                    <div class="text-xs sm:text-sm font-black text-amber-300 mt-1">${esc(firstWord)}</div>
                 </div>
-                <div id="answer-slot" class="min-h-[80px] p-5 rounded-2xl bg-darkBg border-2 border-dashed border-indigo-500/40 flex flex-wrap gap-2.5 items-center justify-center shadow-inner" dir="ltr"></div>
-                <div id="words-pool" class="flex flex-wrap gap-2.5 justify-center" dir="ltr"></div>
-                <div class="flex items-center justify-center gap-3 pt-4">
-                    <button onclick="playPopSound(); checkReorderAnswer()" class="px-7 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl hover-lift transition text-sm">تحقق من الإجابة</button>
-                    <button onclick="playPopSound(); nextChallenge()" class="px-5 py-3 bg-amber-500/20 text-amber-300 font-bold rounded-2xl hover-lift transition text-sm border border-amber-500/30">السؤال التالي ➡</button>
+                <div id="answer-slot" class="min-h-[65px] p-3 rounded-2xl bg-darkBg border-2 border-dashed border-indigo-500/40 flex flex-wrap gap-1.5 items-center justify-center shadow-inner w-full" dir="ltr"></div>
+                <div id="words-pool" class="flex flex-wrap gap-1.5 justify-center w-full" dir="ltr"></div>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2 w-full">
+                    <button onclick="playPopSound(); checkReorderAnswer()" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl transition text-xs sm:text-sm">تحقق من الإجابة</button>
+                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-amber-500/20 text-amber-300 font-bold rounded-2xl transition text-xs sm:text-sm border border-amber-500/30">التالي ➡</button>
                 </div>`;
         } else if (item.type === 'tf') {
             innerHTML += `
-                <div class="p-6 rounded-2xl bg-darkBg border-2 border-indigo-500/40 text-lg font-black text-white en-text my-4 shadow-inner text-center" dir="ltr">"${esc(item.sentence)}"</div>
-                <div class="text-xs text-indigo-300 font-bold mb-3">حدد هل الجملة صحيحة (T) أم خاطئة (F):</div>
-                <div class="grid grid-cols-2 gap-4" dir="ltr">
-                    <button onclick="playPopSound(); checkTrueFalseAnswer(true, ${item.isTrue})" class="p-6 rounded-2xl bg-emerald-600/20 hover:bg-emerald-600/40 border-2 border-emerald-500 text-emerald-300 font-black text-2xl hover-lift transition shadow-lg flex items-center justify-center gap-2">
+                <div class="p-3.5 sm:p-5 rounded-2xl bg-darkBg border-2 border-indigo-500/40 text-sm sm:text-lg font-black text-white en-text my-2 shadow-inner text-center break-words" dir="ltr">"${esc(item.sentence)}"</div>
+                <div class="text-[11px] sm:text-xs text-indigo-300 font-bold mb-2.5">حدد هل الجملة صحيحة (T) أم خاطئة (F):</div>
+                <div class="grid grid-cols-2 gap-2.5" dir="ltr">
+                    <button onclick="playPopSound(); checkTrueFalseAnswer(true, ${item.isTrue})" class="p-3.5 sm:p-5 rounded-2xl bg-emerald-600/20 hover:bg-emerald-600/40 border-2 border-emerald-500 text-emerald-300 font-black text-lg sm:text-xl transition shadow-lg flex flex-col items-center justify-center gap-1">
                         <span>[ T ]</span>
-                        <span class="text-xs font-semibold">(صحيح True)</span>
+                        <span class="text-[10px] font-semibold">(True)</span>
                     </button>
-                    <button onclick="playPopSound(); checkTrueFalseAnswer(false, ${item.isTrue})" class="p-6 rounded-2xl bg-rose-600/20 hover:bg-rose-600/40 border-2 border-rose-500 text-rose-300 font-black text-2xl hover-lift transition shadow-lg flex items-center justify-center gap-2">
+                    <button onclick="playPopSound(); checkTrueFalseAnswer(false, ${item.isTrue})" class="p-3.5 sm:p-5 rounded-2xl bg-rose-600/20 hover:bg-rose-600/40 border-2 border-rose-500 text-rose-300 font-black text-lg sm:text-xl transition shadow-lg flex flex-col items-center justify-center gap-1">
                         <span>[ F ]</span>
-                        <span class="text-xs font-semibold">(خطأ False)</span>
+                        <span class="text-[10px] font-semibold">(False)</span>
                     </button>
                 </div>
-                <div class="flex justify-end pt-4">
-                    <button onclick="playPopSound(); nextChallenge()" class="px-5 py-3 bg-slate-800 text-slate-300 font-bold rounded-2xl hover-lift transition text-sm border border-darkBorder">تخطي / السؤال التالي ➡</button>
+                <div class="flex justify-end pt-2 w-full">
+                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-xs border border-darkBorder">تخطي / التالي ➡</button>
                 </div>`;
-        } else if (item.type === 'passage') {
-            innerHTML += `
-                <div class="p-5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-left en-text mb-4 shadow-inner" dir="ltr">
-                    <div class="text-[11px] text-indigo-400 font-bold mb-1 uppercase">Reading Passage:</div>
-                    <p class="text-sm font-semibold text-slate-100 leading-relaxed">${esc(item.passageText)}</p>
-                </div>
-                <div class="space-y-4 text-right">
-                    <div class="p-4 rounded-2xl bg-darkBg border border-darkBorder space-y-2">
-                        <div class="text-xs font-bold text-amber-300">1. ${esc(item.question1.translation)}</div>
-                        <div class="text-sm font-black text-white en-text" dir="ltr">${esc(item.question1.q)}</div>
-                        <div class="grid grid-cols-2 gap-2 mt-2" dir="ltr">
-                            ${shuffle(item.question1.options).map(opt => `
-                                <button onclick="playPopSound(); checkPassageAnswer('${escAttr(opt)}', '${escAttr(item.question1.ans)}', this)" class="p-3 rounded-xl glass-panel border border-darkBorder text-xs font-bold text-slate-100 hover:border-indigo-500 transition en-text">${esc(opt)}</button>
-                            `).join('')}
-                        </div>
-                    </div>
-                    <div class="p-4 rounded-2xl bg-darkBg border border-darkBorder space-y-2">
-                        <div class="text-xs font-bold text-amber-300">2. ${esc(item.question2.translation)}</div>
-                        <div class="text-sm font-black text-white en-text" dir="ltr">${esc(item.question2.q)}</div>
-                        <div class="grid grid-cols-2 gap-2 mt-2" dir="ltr">
-                            ${shuffle(item.question2.options).map(opt => `
-                                <button onclick="playPopSound(); checkPassageAnswer('${escAttr(opt)}', '${escAttr(item.question2.ans)}', this)" class="p-3 rounded-xl glass-panel border border-darkBorder text-xs font-bold text-slate-100 hover:border-indigo-500 transition en-text">${esc(opt)}</button>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-end pt-4">
-                    <button onclick="playPopSound(); nextChallenge()" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-2xl text-xs hover-lift transition">السؤال التالي ➡</button>
-                </div>`;
-        } else if (item.type === 'choose' || item.type === 'riddle') {
+        } else if (item.type === 'choose') {
             const shuffledOpts = shuffle(item.options);
             innerHTML += `
-                <div class="text-xl font-black text-white en-text my-4" dir="ltr">${esc(item.q)}</div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" dir="ltr">
+                <div class="text-sm sm:text-lg font-black text-white en-text my-2 break-words" dir="ltr">${esc(item.q)}</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" dir="ltr">
                     ${shuffledOpts.map(opt => `
-                        <button onclick="playPopSound(); checkChooseAnswer('${escAttr(opt)}', '${escAttr(item.ans)}')" class="p-4 rounded-2xl glass-panel border border-darkBorder font-bold text-sm text-slate-100 hover:border-indigo-500 hover-lift transition en-text">${esc(opt)}</button>
+                        <button onclick="playPopSound(); checkChooseAnswer('${escAttr(opt)}', '${escAttr(item.ans)}')" class="p-3 sm:p-4 rounded-2xl glass-panel border border-darkBorder font-bold text-xs sm:text-sm text-slate-100 hover:border-indigo-500 transition en-text text-left break-words">${esc(opt)}</button>
                     `).join('')}
                 </div>
-                <div class="flex justify-end pt-4">
-                    <button onclick="playPopSound(); nextChallenge()" class="px-5 py-3 bg-slate-800 text-slate-300 font-bold rounded-2xl hover-lift transition text-sm border border-darkBorder">تخطي / السؤال التالي ➡</button>
+                <div class="flex justify-end pt-2 w-full">
+                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-xs border border-darkBorder">تخطي / التالي ➡</button>
                 </div>`;
         } else if (item.type === 'bracket') {
             innerHTML += `
-                <div class="p-5 rounded-2xl bg-darkBg border border-darkBorder space-y-3">
-                    <div class="text-xs font-bold text-amber-300">${esc(item.hint)}</div>
-                    <div class="text-xl font-black text-white en-text tracking-wide" dir="ltr">"${esc(item.sentence)}"</div>
+                <div class="p-3.5 sm:p-4 rounded-2xl bg-darkBg border border-darkBorder space-y-2.5">
+                    <div class="text-[11px] sm:text-xs font-bold text-amber-300">${esc(item.hint)}</div>
+                    <div class="text-sm sm:text-lg font-black text-white en-text tracking-wide break-words" dir="ltr">"${esc(item.sentence)}"</div>
                 </div>
-                <input type="text" id="type-answer-input" onkeydown="if(event.key==='Enter')" placeholder="اكتب التصحيح هنا..." class="w-full px-5 py-4 rounded-2xl bg-darkBg border-2 border-indigo-500/50 text-base en-text shadow-inner text-white font-bold mt-4" dir="ltr">
-                <div class="flex items-center justify-center gap-3 pt-4">
-                    <button onclick="playPopSound(); checkGeneralInputAnswer('${escAttr(item.target)}')" class="px-7 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl hover-lift transition text-sm">تحقق من الإجابة</button>
-                    <button onclick="playPopSound(); nextChallenge()" class="px-5 py-3 bg-amber-500/20 text-amber-300 font-bold rounded-2xl hover-lift transition text-sm border border-amber-500/30">السؤال التالي ➡</button>
-                </div>`;
-        } else {
-            const promptTitle = item.type === 'vowel' ? 'أكمل الحروف الناقصة:' : (item.type === 'complete' ? 'أكمل الفراغ الحرفي:' : 'تلميح الكلمة:');
-            innerHTML += `
-                <div class="p-4 rounded-2xl bg-darkBg border border-darkBorder text-sm font-bold text-amber-300" dir="rtl">${promptTitle} ${esc(item.hint || item.q)}</div>
-                <input type="text" id="type-answer-input" onkeydown="if(event.key==='Enter') checkGeneralInputAnswer('${escAttr(item.target || item.ans)}')" placeholder="اكتب الإجابة هنا..." class="w-full px-5 py-4 rounded-2xl bg-darkBg border-2 border-indigo-500/50 text-base en-text shadow-inner text-white font-bold" dir="ltr">
-                <div class="flex items-center justify-center gap-3 pt-4">
-                    <button onclick="playPopSound(); checkGeneralInputAnswer('${escAttr(item.target || item.ans)}')" class="px-7 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl hover-lift transition text-sm">تحقق من الإجابة</button>
-                    <button onclick="playPopSound(); nextChallenge()" class="px-5 py-3 bg-amber-500/20 text-amber-300 font-bold rounded-2xl hover-lift transition text-sm border border-amber-500/30">السؤال التالي ➡</button>
+                <input type="text" id="type-answer-input" onkeydown="if(event.key==='Enter')" placeholder="اكتب التصحيح هنا..." class="w-full px-3.5 sm:px-4 py-3 rounded-2xl bg-darkBg border-2 border-indigo-500/50 text-xs sm:text-sm en-text shadow-inner text-white font-bold mt-2.5" dir="ltr">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2 w-full">
+                    <button onclick="playPopSound(); checkGeneralInputAnswer('${escAttr(item.target)}')" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl transition text-xs sm:text-sm">تحقق من الإجابة</button>
+                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-amber-500/20 text-amber-300 font-bold rounded-2xl transition text-xs sm:text-sm border border-amber-500/30">التالي ➡</button>
                 </div>`;
         }
 
@@ -1156,34 +910,19 @@
         }
     }
 
-    function checkPassageAnswer(given, correct, btnEl) {
-        if (String(given).trim().toLowerCase() === String(correct).trim().toLowerCase()) {
-            playCorrectSound();
-            btnEl.classList.remove('bg-darkBg', 'border-darkBorder');
-            btnEl.classList.add('bg-emerald-600', 'text-white', 'border-emerald-400');
-            addXP(20);
-            showNotification('🎉 إجابة صحيحة على سؤال القطعة!');
-        } else {
-            playWrongSound();
-            btnEl.classList.remove('bg-darkBg', 'border-darkBorder');
-            btnEl.classList.add('bg-rose-600', 'text-white', 'border-rose-400');
-            showNotification('❌ إجابة خاطئة، حاول في الخيار الآخر!');
-        }
-    }
-
     function refreshReorderUI() {
         const slot = document.getElementById('answer-slot');
         const pool = document.getElementById('words-pool');
         if (!slot || !pool) return;
         slot.innerHTML = reorderState.placed.length
             ? reorderState.placed.map((tok, pos) => `
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-sm shadow-md en-inline hover-lift" dir="ltr">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-xs sm:text-sm shadow-md en-inline hover-lift" dir="ltr">
                     <span>${esc(tok.w)}</span>
-                    <button onclick="playPopSound(); removeWordToken(${pos})" class="w-5 h-5 rounded-full bg-white/25 hover:bg-white/50 flex items-center justify-center text-xs">&times;</button>
+                    <button onclick="playPopSound(); removeWordToken(${pos})" class="w-4 h-4 rounded-full bg-white/25 hover:bg-white/50 flex items-center justify-center text-[10px]">&times;</button>
                 </div>`).join('')
             : `<span class="text-xs text-slate-400 font-semibold" dir="rtl">انقر على الكلمات بالترتيب الصحيح هنا...</span>`;
         pool.innerHTML = reorderState.pool.map((tok, idx) => tok.used ? '' : `
-            <button onclick="playPopSound(); selectWordToken(${idx})" class="px-4.5 py-2.5 rounded-xl glass-panel border border-darkBorder font-bold text-sm shadow-md hover:border-indigo-500 hover-lift transition en-inline text-slate-200" dir="ltr">${esc(tok.w)}</button>`).join('');
+            <button onclick="playPopSound(); selectWordToken(${idx})" class="px-3.5 py-2 rounded-xl glass-panel border border-darkBorder font-bold text-xs sm:text-sm shadow-md hover:border-indigo-500 hover-lift transition en-inline text-slate-200" dir="ltr">${esc(tok.w)}</button>`).join('');
     }
 
     function selectWordToken(poolIdx) {
@@ -1243,22 +982,15 @@
         }
     }
 
-    function saveChallengeIndex() {
-        lsSet('connect5_challenge_index', challengeIndex);
-    }
+    function saveChallengeIndex() { lsSet('connect5_challenge_index', challengeIndex); }
+    function nextChallenge() { challengeIndex++; saveChallengeIndex(); renderChallengeGame(); }
 
-    function nextChallenge() {
-        challengeIndex++;
-        saveChallengeIndex();
-        renderChallengeGame();
-    }
-
-    // Theme & Audio Helpers
     function updateThemeIcon() {
         const icon = document.getElementById('theme-icon');
-        if (icon) {
-            icon.className = isDarkMode ? 'fa-solid fa-moon text-amber-300' : 'fa-solid fa-sun text-amber-500';
-        }
+        const iconM = document.getElementById('theme-icon-m');
+        const cls = isDarkMode ? 'fa-solid fa-moon text-amber-300' : 'fa-solid fa-sun text-amber-500';
+        if (icon) icon.className = cls;
+        if (iconM) iconM.className = cls;
     }
 
     function toggleTheme() {
@@ -1270,9 +1002,11 @@
     }
 
     function updateAudioIcon() {
-        document.getElementById('audio-icon').className = audioEnabled
-            ? 'fa-solid fa-volume-high text-indigo-400'
-            : 'fa-solid fa-volume-xmark text-slate-500';
+        const cls = audioEnabled ? 'fa-solid fa-volume-high text-indigo-400' : 'fa-solid fa-volume-xmark text-slate-500';
+        const icon = document.getElementById('audio-icon');
+        const iconM = document.getElementById('audio-icon-m');
+        if (icon) icon.className = cls;
+        if (iconM) iconM.className = cls;
     }
     function toggleAudio() {
         audioEnabled = !audioEnabled;
@@ -1283,36 +1017,30 @@
 
     function speakText(text) {
         if (!audioEnabled || !('speechSynthesis' in window)) return;
-        const clean = String(text)
-            .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '')
-            .replace(/\(.*?\)/g, '')
-            .trim();
+        const clean = String(text).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/\(.*?\)/g, '').trim();
         if (!clean) return;
-
         window.speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(clean);
-        const isArabic = /[\u0600-\u06FF]/.test(clean);
-        u.lang = isArabic ? 'ar-EG' : 'en-US';
+        u.lang = /[\u0600-\u06FF]/.test(clean) ? 'ar-EG' : 'en-US';
         u.rate = 0.85;
-        u.pitch = 1.0;
         window.speechSynthesis.speak(u);
     }
 
     function renderVocabGrid(list) {
         const grid = document.getElementById('vocab-grid');
         if (!list.length) {
-            grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 text-sm">لا توجد نتائج مطابقة</div>`;
+            grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 text-xs sm:text-sm">لا توجد نتائج مطابقة</div>`;
             return;
         }
         grid.innerHTML = list.map(item => `
-            <div class="group p-5 rounded-2xl glass-panel border border-darkBorder shadow-md hover:border-indigo-500/50 hover-lift transition cursor-pointer" onclick="playPopSound(); speakText('${escAttr(item.en)}')">
+            <div class="group p-4 sm:p-5 rounded-2xl glass-panel border border-darkBorder shadow-md hover:border-indigo-500/50 hover-lift transition cursor-pointer w-full" onclick="playPopSound(); speakText('${escAttr(item.en)}')">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-indigo-300 bg-indigo-500/15 px-3 py-1 rounded-xl en-inline border border-indigo-500/30" dir="ltr">${esc(item.type)}</span>
-                    <button onclick="event.stopPropagation(); playPopSound(); speakText('${escAttr(item.en)}')" class="w-9 h-9 rounded-xl bg-indigo-500/20 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition text-indigo-300" title="انطق الكلمة">🔊</button>
+                    <span class="text-[11px] font-bold text-indigo-300 bg-indigo-500/15 px-2.5 py-1 rounded-xl en-inline border border-indigo-500/30" dir="ltr">${esc(item.type)}</span>
+                    <button onclick="event.stopPropagation(); playPopSound(); speakText('${escAttr(item.en)}')" class="w-8 h-8 rounded-xl bg-indigo-500/25 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition text-indigo-300 text-xs" title="انطق الكلمة">🔊</button>
                 </div>
-                <div class="mt-4">
-                    <div class="font-black text-xl text-white group-hover:text-indigo-300 transition en-text" dir="ltr">${esc(item.en)}</div>
-                    <div class="text-sm text-slate-300 mt-1 font-semibold">${esc(item.ar)}</div>
+                <div class="mt-3">
+                    <div class="font-black text-lg sm:text-xl text-white group-hover:text-indigo-300 transition en-text" dir="ltr">${esc(item.en)}</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1 font-semibold">${esc(item.ar)}</div>
                 </div>
             </div>`).join('');
     }
@@ -1329,31 +1057,24 @@
     }
     function showNotification(text) {
         const n = document.createElement('div');
-        n.className = 'fixed bottom-8 right-8 z-[70] glass-panel text-white px-6 py-4 rounded-2xl shadow-2xl text-sm font-bold border border-indigo-500/40 text-center backdrop-blur-md animate-bounce';
+        n.className = 'fixed bottom-6 right-4 left-4 sm:left-auto sm:right-6 z-[70] glass-panel text-white px-5 py-3.5 rounded-2xl shadow-2xl text-xs sm:text-sm font-bold border border-indigo-500/40 text-center backdrop-blur-md animate-bounce';
         n.textContent = text;
         document.body.appendChild(n);
         setTimeout(() => n.remove(), 4000);
     }
 
-    // Custom Games Creator & Stories placeholders
     function renderCustomGames() {
         const grid = document.getElementById('custom-games-grid');
         if (!grid) return;
         if (!customGames.length) {
-            grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 text-sm">لا توجد ألعاب مبتكرة بعد.</div>`;
+            grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 text-xs sm:text-sm">لا توجد ألعاب مبتكرة بعد.</div>`;
             return;
         }
     }
-    function renderStories() {
-        const grid = document.getElementById('stories-grid');
-        if (!grid) return;
-    }
+    function renderStories() {}
     function renderOnlineUsersList() {}
     function renderChatMessages() {}
-    function updatePresenceOnline() {}
-    function initFirebaseSync() {}
 
-    // Init on load
     window.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.toggle('dark', isDarkMode);
         document.documentElement.classList.toggle('light', !isDarkMode);
@@ -1367,9 +1088,7 @@
         renderStories();
         updateXPDisplay();
         switchTab('vocab');
-        initFirebaseSync();
 
-        // Splash screen animation timeout
         const splashProg = document.getElementById('splash-progress');
         const splashEl = document.getElementById('startup-splash');
         if (splashProg) splashProg.style.width = '100%';
