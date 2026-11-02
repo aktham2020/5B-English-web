@@ -246,7 +246,7 @@
                         <textarea id="custom-story-text" rows="3" placeholder="Write your short story here..." class="w-full px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 en-text shadow-inner text-slate-800 dark:text-slate-100" dir="ltr"></textarea>
                     </div>
                     <div class="flex justify-end">
-                        <button onclick="playPopSound(); saveCustomStory()" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-2">
+                        <button type="button" onclick="playPopSound(); saveCustomStory()" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-2 cursor-pointer active:scale-95">
                             <span>نشر القصة للجميع</span>
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -407,8 +407,21 @@
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-200 dark:border-darkBorder">
-                <button onclick="playPopSound(); closeCreateGameModal()" class="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-2xl text-xs border border-slate-300 dark:border-darkBorder">إلغاء</button>
-                <button onclick="playPopSound(); saveCustomGameMulti()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg transition text-xs sm:text-sm">نشر اللعبة للجميع 🚀</button>
+                <button type="button" onclick="playPopSound(); closeCreateGameModal()" class="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-2xl text-xs border border-slate-300 dark:border-darkBorder cursor-pointer">إلغاء</button>
+                <button type="button" onclick="playPopSound(); saveCustomGameMulti()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg transition text-xs sm:text-sm cursor-pointer active:scale-95">نشر اللعبة للجميع 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAY CUSTOM GAME MODAL -->
+    <div id="play-custom-game-modal" class="modal-hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md items-center justify-center p-3 sm:p-4" style="display:none">
+        <div class="glass-panel rounded-3xl p-5 sm:p-8 max-w-lg w-full space-y-5 shadow-2xl border border-slate-300 dark:border-darkBorder bg-white dark:bg-darkCard">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-darkBorder pb-3">
+                <h3 id="play-game-modal-title" class="text-base sm:text-xl font-black text-indigo-600 dark:text-indigo-400 flex items-center gap-2">🎮 لعبة مبتكرة</h3>
+                <button onclick="playPopSound(); closePlayCustomGameModal()" class="text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+            <div id="play-game-modal-body" class="space-y-4">
+                <!-- Dynamic Game Content -->
             </div>
         </div>
     </div>
@@ -558,33 +571,33 @@
         },
         {
             id: 2,
-            title: "Unit 2: Eating Healthy",
-            arabicTitle: "تناول الطعام الصحي",
+            title: "Unit 2: My Healthy Body",
+            arabicTitle: "جسمي الصحي",
             vocab: [
                 { en: "Swimming", ar: "سباحة", type: "Noun" },
-                { en: "Mental health", ar: "الصحة العقلية والنفسية", type: "Noun" },
+                { en: "Mental health", ar: "الصحة العقلية", type: "Noun" },
                 { en: "Heart", ar: "قلب", type: "Noun" },
-                { en: "Fit", ar: "ليق بدنياً / لائق", type: "Adjective" },
+                { en: "Fit", ar: "لياقي / بصحة جيدة", type: "Adjective" },
                 { en: "Vitamins", ar: "فيتامينات", type: "Noun" },
                 { en: "Reduce", ar: "يقلل", type: "Verb" },
                 { en: "Habit", ar: "عادة", type: "Noun" },
                 { en: "Instead of", ar: "بدلاً من", type: "Preposition" },
-                { en: "Oxygen", ar: "أكسجين", type: "Noun" },
-                { en: "Blood vessels", ar: "أوعية دموية", type: "Noun" },
+                { en: "Oxygen", ar: "أوكسجين", type: "Noun" },
+                { en: "Blood vessels", ar: "أوعية دمويّة", type: "Noun" },
                 { en: "Cell", ar: "خلية", type: "Noun" },
                 { en: "Treatment", ar: "علاج", type: "Noun" },
-                { en: "Emergencies", ar: "حالات الطوارئ", type: "Noun" },
+                { en: "Emergencies", ar: "حالات طوارئ", type: "Noun" },
                 { en: "Pharmacist", ar: "صيدلي", type: "Noun" },
-                { en: "Muscels", ar: "عضلات", type: "Noun" }
+                { en: "Muscles", ar: "عضلات", type: "Noun" }
             ],
             grammar: {
-                title: "Countable & Uncountable Nouns & Some / Any (الأسماء المعدودة وغير المعدودة)",
-                explanation: "الأسماء المعدودة لها مفرد وجمع. الأسماء غير المعدودة ليس لها جمع ولا تجمع بـ (s). نستخدم (some) في الجمل المثبتة، ونستخدم (any) في الجمل المنفية وفي حالة الأسئلة.",
+                title: "Modal Verbs: Should / Shouldn't & Good at / Bad at",
+                explanation: "نستخدم (should / shouldn't) للتعبير عن النصيحة ويأتي بعدها الفعل في المصدر (Infinitive). بينما نستخدم (good at / bad at) للتعبير عن المهارات ويأتي بعدها اسم أو فعل مضاف له (-ing).",
                 examples: [
-                    "I would like some water, please.",
-                    "Do you have any apples in the kitchen?",
-                    "Our heart pumps blood to all our muscles.",
-                    "We need healthy food to get energy."
+                    "You should drink water instead of soda.",
+                    "He is good at swimming.",
+                    "She shouldn't skip sleep for bad habits.",
+                    "Regular exercise strengthens your heart and muscles."
                 ]
             }
         },
@@ -593,511 +606,699 @@
             title: "Unit 3: When Nature Changes",
             arabicTitle: "عندما تتغير الطبيعة",
             vocab: [
-                { en: "Sand storm", ar: "عاصفة رملية", type: "Noun" },
-                { en: "Thunder storm", ar: "عاصفة رعدية", type: "Noun" },
+                { en: "Thunderstorm", ar: "عاصفة رعدية", type: "Noun" },
                 { en: "Heatwave", ar: "موجة حارة", type: "Noun" },
                 { en: "Flood", ar: "فيضان", type: "Noun" },
-                { en: "Wild fire", ar: "حريق غابات", type: "Noun" },
                 { en: "Drought", ar: "جفاف", type: "Noun" },
-                { en: "Pollution", ar: "تلوث", type: "Noun" },
-                { en: "Volcano", ar: "بركان", type: "Noun" },
-                { en: "Wind", ar: "رياح", type: "Noun" },
-                { en: "Rain", ar: "مطر", type: "Noun" },
-                { en: "Environment", ar: "البيئة", type: "Noun" },
-                { en: "Destroy", ar: "يدمر", type: "Verb" },
-                { en: "Hit", ar: "يضرب / يصدم", type: "Verb" }
+                { en: "Tornado", ar: "إعصار", type: "Noun" },
+                { en: "Storm", ar: "عاصفة", type: "Noun" },
+                { en: "Climate change", ar: "تغير المناخ", type: "Noun" },
+                { en: "Temperature", ar: "درجة الحرارة", type: "Noun" },
+                { en: "Protect", ar: "يحمي", type: "Verb" },
+                { en: "Environment", ar: "البيئة", type: "Noun" }
             ],
             grammar: {
-                title: "Past Simple Tense (زمن الماضي البسيط)",
-                explanation: "يعبر زمن الماضي البسيط عن حدث وقع وانتهى في الماضي. الأفعال المنتظمة يتم إضافة (ed أو d أو ied) لنهاية الفعل. أما الأفعال الشاذة فتحفظ كما هي مثل (go -> went, have -> had).",
+                title: "Past Continuous & Past Simple (الماضي المستمر والماضي البسيط مع When)",
+                explanation: "نستخدم الماضي المستمر (was/were + verb-ing) للتعبير عن حدث كان مستمراً في الماضي، ونربطه بالماضي البسيط (when + past verb) للحدث الذي قطعه.",
                 examples: [
-                    "A terrible sand storm hit our town yesterday.",
-                    "Heavy rain caused a massive flood last week.",
-                    "We visited the museum and saw amazing things.",
-                    "She didn't go to school yesterday."
+                    "We were walking home when the thunderstorm started.",
+                    "It was getting hot when the heatwave hit the city.",
+                    "They were studying when the power went out."
                 ]
             }
-        },
-        { id: 4, title: "Unit 4", arabicTitle: "الوحدة الرابعة", vocab: [], grammar: { title: "", explanation: "", examples: [] } },
-        { id: 5, title: "Unit 5", arabicTitle: "الوحدة الخامسة", vocab: [], grammar: { title: "", explanation: "", examples: [] } },
-        { id: 6, title: "Unit 6", arabicTitle: "الوحدة السادسة", vocab: [], grammar: { title: "", explanation: "", examples: [] } }
-    ];
-
-    const MASSIVE_CHALLENGE_BANK_BASE = [
-        { type: 'reorder', sentence: "Water weeds grow along the Nile River.", translation: "الأعشاب المائية تنمو على طول نهر النيل." },
-        { type: 'reorder', sentence: "Crocodiles hunt insects near the water.", translation: "التماسيح تطارد الحشرات قرب الماء." },
-        { type: 'reorder', sentence: "He always eats healthy food for breakfast.", translation: "هو دائماً يأكل طعاماً صحياً على الإفطار." },
-        { type: 'reorder', sentence: "She usually waters the plants in the morning.", translation: "هي عادة تسقي النباتات في الصباح." },
-        { type: 'choose', q: "Water ___ grow along the Nile River.", options: ["weeds", "cars", "stones", "books"], ans: "weeds", translation: "الأعشاب المائية تنمو على طول نهر النيل." },
-        { type: 'choose', q: "He always ___ to school early.", options: ["walk", "walks", "walking", "walked"], ans: "walks", translation: "هو دائماً يمشي إلى المدرسة مبكراً." },
-        { type: 'choose', q: "The heart pumps ___ to all our muscles.", options: ["blood", "juice", "water", "air"], ans: "blood", translation: "القلب يضخ الدم لجميع عضلاتنا." },
-        { type: 'choose', q: "I would like ___ water, please.", options: ["some", "any", "a", "an"], ans: "some", translation: "أود بعض الماء من فضلك." },
-        { type: 'choose', q: "A terrible ___ storm hit our town.", options: ["sand", "car", "book", "pen"], ans: "sand", translation: "عاصفة رملية مروعة ضربت مدينتنا." },
-        { type: 'tf', sentence: "Water weeds grow along the Nile River.", isTrue: true, translation: "الأعشاب المائية تنمو على طول نهر النيل." },
-        { type: 'tf', sentence: "Crocodiles live in the cold snow.", isTrue: false, translation: "التماسيح تعيش في الثلج البارد." },
-        { type: 'tf', sentence: "The heart pumps blood to all our muscles.", isTrue: true, translation: "القلب يضخ الدم إلى جميع عضلاتنا." },
-        { type: 'bracket', sentence: "He usually (play) tennis on Fridays.", target: "plays", hint: "صحح الفعل بين القوسين (المضارع البسيط):", translation: "هو عادة يلعب التنس أيام الجمعة." },
-        { type: 'bracket', sentence: "They (goes) to the park every morning.", target: "go", hint: "صحح الفعل بين القوسين (مع الجمع):", translation: "هم يذهبون إلى الحديقة كل صباح." },
-        { type: 'bracket', sentence: "Yesterday, a sand storm (hit) our town.", target: "hit", hint: "صحح الفعل في الماضي البسيط:", translation: "أمس ضربت عاصفة رملية مدينتنا." }
-    ];
-
-    let MASSIVE_CHALLENGE_BANK = [];
-    function initShuffledChallengeBank() {
-        const savedShuffled = lsJSON('connect5_shuffled_bank', null);
-        if (savedShuffled && savedShuffled.length === MASSIVE_CHALLENGE_BANK_BASE.length) {
-            MASSIVE_CHALLENGE_BANK = savedShuffled;
-        } else {
-            MASSIVE_CHALLENGE_BANK = shuffle(MASSIVE_CHALLENGE_BANK_BASE);
-            lsSet('connect5_shuffled_bank', JSON.stringify(MASSIVE_CHALLENGE_BANK));
         }
+    ];
+
+    // Global State Variables
+    let currentUnitIndex = 0;
+    let totalXP = parseInt(lsGet('quest_xp', '0'));
+    let audioEnabled = lsGet('quest_audio', 'true') === 'true';
+    let currentTheme = lsGet('quest_theme', 'dark');
+    let userName = lsGet('quest_username', 'أبطال الخامس');
+    let userAvatar = lsGet('quest_avatar', '🚀');
+    let customGames = lsJSON('quest_custom_games', []);
+    let customStories = lsJSON('quest_custom_stories', []);
+    let onlineUsers = [
+        { id: 1, name: "عمر أحمد", avatar: "🦁", status: "متصل" },
+        { id: 2, name: "سارة محمد", avatar: "⭐", status: "نشط الآن" },
+        { id: 3, name: "مريم علي", avatar: "👑", status: "متصل" },
+        { id: 4, name: "يوسف خليل", avatar: "🛸", status: "في تحدي الألعاب" }
+    ];
+    let activeChatPeer = null;
+    let chatMessages = lsJSON('quest_chat_msgs', {});
+
+    // Helper functions
+    function updateXPDisplay() {
+        const totalXpEl = document.getElementById('total-xp');
+        const modalXpEl = document.getElementById('modal-xp-display');
+        const gameScoreEl = document.getElementById('game-score-badge');
+        if (totalXpEl) totalXpEl.innerText = `${totalXP} XP`;
+        if (modalXpEl) modalXpEl.innerText = `${totalXP} XP`;
+        if (gameScoreEl) gameScoreEl.innerText = `${totalXP} XP`;
+        lsSet('quest_xp', totalXP);
     }
 
-    let currentUnitId = parseInt(lsGet('connect5_unit', '1'), 10);
-    let challengeIndex = parseInt(lsGet('connect5_challenge_index', '0'), 10);
-    let totalXP = parseInt(lsGet('connect5_xp', '0'), 10);
-    let audioEnabled = lsGet('connect5_audio', 'true') === 'true';
-    let isDarkMode = lsGet('connect5_dark', 'true') === 'true';
-    let currentUserName = lsGet('connect5_username', 'أبطال الخامس');
-    let currentAvatar = lsGet('connect5_avatar', '🚀');
-    let reorderState = { placed: [], pool: [] };
-    let customGames = lsJSON('connect5_custom_games', []);
+    function addXP(amount) {
+        totalXP += amount;
+        updateXPDisplay();
+    }
+
+    function toggleAudio() {
+        audioEnabled = !audioEnabled;
+        lsSet('quest_audio', audioEnabled);
+        updateAudioIcon();
+    }
+
+    function updateAudioIcon() {
+        const icon = document.getElementById('audio-icon');
+        const iconM = document.getElementById('audio-icon-m');
+        const classNames = audioEnabled ? 'fa-solid fa-volume-high text-sm' : 'fa-solid fa-volume-xmark text-sm';
+        if (icon) icon.className = classNames;
+        if (iconM) iconM.className = classNames;
+    }
+
+    function toggleTheme() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        lsSet('quest_theme', currentTheme);
+        applyTheme();
+    }
+
+    function applyTheme() {
+        const html = document.documentElement;
+        if (currentTheme === 'light') {
+            html.classList.remove('dark');
+            html.classList.add('light');
+        } else {
+            html.classList.remove('light');
+            html.classList.add('dark');
+        }
+        updateThemeIcon();
+    }
+
+    function updateThemeIcon() {
+        const icon = document.getElementById('theme-icon');
+        const iconM = document.getElementById('theme-icon-m');
+        const classNames = currentTheme === 'dark' ? 'fa-solid fa-sun text-sm' : 'fa-solid fa-moon text-sm';
+        if (icon) icon.className = classNames;
+        if (iconM) iconM.className = classNames;
+    }
+
+    function updateAvatarDisplay() {
+        const headerAvatar = document.getElementById('header-avatar-display');
+        const miniAvatar = document.getElementById('header-mini-avatar');
+        const modalAvatar = document.getElementById('modal-avatar-display');
+        const headerName = document.getElementById('header-username-display');
+
+        if (headerAvatar) headerAvatar.innerHTML = userAvatar.startsWith('data:') ? `<img src="${userAvatar}" class="w-full h-full object-cover">` : userAvatar;
+        if (miniAvatar) miniAvatar.innerHTML = userAvatar.startsWith('data:') ? `<img src="${userAvatar}" class="w-full h-full object-cover">` : userAvatar;
+        if (modalAvatar) modalAvatar.innerHTML = userAvatar.startsWith('data:') ? `<img src="${userAvatar}" class="w-full h-full object-cover">` : userAvatar;
+        if (headerName) headerName.innerText = userName;
+    }
 
     function openProfileModal() {
-        const nameInput = document.getElementById('user-name-input');
-        const modalXp = document.getElementById('modal-xp-display');
-        const modalAvatar = document.getElementById('modal-avatar-display');
-        if (nameInput) nameInput.value = currentUserName;
-        if (modalXp) modalXp.textContent = totalXP + ' XP';
-        if (modalAvatar) {
-            if (currentAvatar.startsWith('data:image')) {
-                modalAvatar.innerHTML = `<img src="${currentAvatar}" alt="avatar" class="w-full h-full object-cover">`;
-            } else {
-                modalAvatar.textContent = currentAvatar;
-            }
-        }
+        document.getElementById('user-name-input').value = userName;
         showModal('profile-modal');
     }
-    function closeProfileModal() { hideModal('profile-modal'); }
-    function saveUserProfile() {
-        const nameInput = document.getElementById('user-name-input');
-        if (nameInput) {
-            const val = nameInput.value.trim();
-            if (val) {
-                currentUserName = val;
-                lsSet('connect5_username', val);
-            }
-        }
-        updateAvatarDisplay();
-        closeProfileModal();
-        showNotification('✨ تم حفظ الملف الشخصي وتحديث بياناتك بنجاح!');
+
+    function closeProfileModal() {
+        hideModal('profile-modal');
     }
 
-    function openAvatarModal() { showModal('avatar-modal'); }
-    function closeAvatarModal() { hideModal('avatar-modal'); }
+    function saveUserProfile() {
+        const newName = document.getElementById('user-name-input').value.trim();
+        if (newName) {
+            userName = newName;
+            lsSet('quest_username', userName);
+            updateAvatarDisplay();
+        }
+        closeProfileModal();
+    }
+
+    function openAvatarModal() {
+        showModal('avatar-modal');
+    }
+
+    function closeAvatarModal() {
+        hideModal('avatar-modal');
+    }
+
     function setAvatarPreset(emoji) {
-        currentAvatar = emoji;
-        lsSet('connect5_avatar', emoji);
+        userAvatar = emoji;
+        lsSet('quest_avatar', userAvatar);
         updateAvatarDisplay();
     }
-    function handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-                const size = 128;
-                const canvas = document.createElement('canvas');
-                canvas.width = size; canvas.height = size;
-                const ctx = canvas.getContext('2d');
-                const min = Math.min(img.width, img.height);
-                ctx.drawImage(img, (img.width - min) / 2, (img.height - min) / 2, min, min, 0, 0, size, size);
-                currentAvatar = canvas.toDataURL('image/jpeg', 0.8);
-                lsSet('connect5_avatar', currentAvatar);
+
+    function handleImageUpload(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                userAvatar = evt.target.result;
+                lsSet('quest_avatar', userAvatar);
                 updateAvatarDisplay();
             };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-    function updateAvatarDisplay() {
-        const disp = document.getElementById('header-avatar-display');
-        const miniDisp = document.getElementById('header-mini-avatar');
-        const nameDisp = document.getElementById('header-username-display');
-        if (nameDisp) nameDisp.textContent = currentUserName;
-        if (miniDisp) {
-            if (currentAvatar.startsWith('data:image')) {
-                miniDisp.innerHTML = `<img src="${currentAvatar}" class="w-full h-full object-cover rounded-md">`;
-            } else {
-                miniDisp.textContent = currentAvatar;
-            }
-        }
-        if (disp) {
-            if (currentAvatar.startsWith('data:image')) {
-                disp.className = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-lg border-2 border-indigo-400/30';
-                disp.innerHTML = `<img src="${currentAvatar}" alt="avatar" class="w-full h-full object-cover">`;
-            } else {
-                disp.className = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-indigo-500 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-lg border-2 border-indigo-400/30';
-                disp.textContent = currentAvatar;
-            }
+            reader.readAsDataURL(file);
         }
     }
 
     function renderUnitsBar() {
         const container = document.getElementById('units-bar-container');
         if (!container) return;
-        container.innerHTML = CURRICULUM.map(unit => {
-            const isLocked = unit.id >= 4;
+        container.innerHTML = CURRICULUM.map((unit, idx) => {
+            const isActive = idx === currentUnitIndex;
             return `
-                <button onclick="${isLocked ? 'playWrongSound(); showNotification(\"🔒 هذه الوحدة مقفلة حالياً!\")' : `playPopSound(); loadUnitData(${unit.id})`}" class="relative p-3.5 sm:p-4 rounded-2xl text-right hover-lift transition flex flex-col justify-between border ${unit.id === currentUnitId && !isLocked ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-indigo-500 shadow-xl scale-[1.02]' : 'glass-panel border-darkBorder hover:border-indigo-500/50'} ${isLocked ? 'opacity-70 cursor-not-allowed' : ''}">
-                    ${isLocked ? `
-                        <div class="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center space-y-1">
-                            <i class="fa-solid fa-lock text-3xl text-amber-400 animate-pulse"></i>
-                            <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded-lg border border-amber-500/30">مقفلة</span>
-                        </div>
-                    ` : ''}
-                    <div class="flex items-center justify-between w-full">
-                        <span class="text-[11px] font-bold opacity-80 en-inline" dir="ltr">Unit ${unit.id}</span>
-                        <span class="text-xs sm:text-sm">${isLocked ? '🔒' : '📚'}</span>
-                    </div>
-                    <div class="mt-2.5">
-                        <div class="font-black text-xs sm:text-sm truncate en-text" dir="ltr">${esc(unit.title)}</div>
-                        <div class="text-[10px] sm:text-[11px] opacity-80 truncate mt-0.5">${esc(unit.arabicTitle)}</div>
-                    </div>
+                <button onclick="playPopSound(); loadUnitData(${idx})" class="p-3.5 sm:p-4 rounded-2xl transition text-right hover-lift border ${isActive ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-indigo-400 shadow-lg' : 'bg-white dark:bg-darkBg text-slate-800 dark:text-slate-200 border-slate-200 dark:border-darkBorder hover:border-indigo-500/50'}">
+                    <div class="text-[10px] sm:text-xs font-bold opacity-80 en-inline" dir="ltr">Unit ${unit.id}</div>
+                    <div class="font-black text-xs sm:text-sm mt-0.5 truncate en-inline leading-snug" dir="ltr">${esc(unit.title.replace(/^Unit \d+: /, ''))}</div>
+                    <div class="text-[10px] sm:text-[11px] font-semibold opacity-75 mt-0.5 truncate">${esc(unit.arabicTitle)}</div>
                 </button>
             `;
         }).join('');
     }
 
-    function loadUnitData(unitId) {
-        if (unitId >= 4) {
-            playWrongSound();
-            showNotification('🔒 هذه الوحدة مقفلة حالياً ولا يمكن فتحها!');
-            return;
-        }
-        currentUnitId = unitId;
-        lsSet('connect5_unit', unitId);
+    function loadUnitData(index) {
+        currentUnitIndex = index;
         renderUnitsBar();
-        const unit = CURRICULUM.find(u => u.id === unitId);
-        if (!unit) return;
-
-        document.querySelectorAll('.unit-transition').forEach(el => {
-            el.style.animation = 'none';
-            el.offsetHeight;
-            el.style.animation = 'fadeInScale 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-        });
-
-        const badge = document.getElementById('current-unit-badge');
-        const title = document.getElementById('current-unit-title');
-        const search = document.getElementById('vocab-search');
+        const unit = CURRICULUM[index];
         
-        if (badge) badge.textContent = `Unit ${unit.id}`;
-        if (title) title.textContent = unit.title;
-        if (search) search.value = '';
-        renderVocabGrid(unit.vocab);
+        document.getElementById('current-unit-badge').innerText = `Unit ${unit.id}`;
+        document.getElementById('current-unit-title').innerHTML = `
+            <span class="block text-slate-900 dark:text-white en-inline font-black" dir="ltr">${esc(unit.title)}</span>
+            <span class="block text-xs sm:text-sm text-indigo-500 dark:text-indigo-400 font-bold mt-0.5">${esc(unit.arabicTitle)}</span>
+        `;
 
-        const gTitle = document.getElementById('grammar-title');
-        const gContent = document.getElementById('grammar-content');
-        if (gTitle) gTitle.textContent = unit.grammar.title;
-        if (gContent) {
-            gContent.innerHTML = `
-                <div class="p-4 sm:p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-xs sm:text-sm font-semibold leading-relaxed shadow-inner">${esc(unit.grammar.explanation)}</div>
-                <div class="space-y-3 pt-2">
-                    <h4 class="font-bold text-xs text-indigo-400 uppercase tracking-wider">أمثلة توضيحية (Examples):</h4>
-                    <ul class="space-y-3">
-                        ${unit.grammar.examples.map(ex => `
-                            <li class="p-3.5 sm:p-4 rounded-2xl glass-panel border border-darkBorder text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover-lift transition">
-                                <span class="en-text font-semibold text-slate-100" dir="ltr">${esc(ex)}</span>
-                                <button onclick="playPopSound(); speakText('${escAttr(ex)}')" class="px-3 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white transition shrink-0 flex items-center gap-1.5 text-xs font-bold"><i class="fa-solid fa-volume-high"></i> استماع</button>
-                            </li>`).join('')}
-                    </ul>
-                </div>`;
-        }
+        renderVocab(unit.vocab);
+        renderGrammar(unit.grammar);
+    }
+
+    function renderVocab(vocabList) {
+        const container = document.getElementById('vocab-grid');
+        if (!container) return;
+        container.innerHTML = vocabList.map(item => `
+            <div class="p-4 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-darkBorder shadow-md hover-lift flex items-center justify-between gap-3">
+                <div class="space-y-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <span class="font-black text-base sm:text-lg text-indigo-600 dark:text-indigo-400 en-inline" dir="ltr">${esc(item.en)}</span>
+                        <span class="text-[10px] bg-indigo-500/10 text-indigo-500 px-2 py-0.5 rounded-md font-bold">${esc(item.type)}</span>
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 truncate">${esc(item.ar)}</div>
+                </div>
+                <button onclick="playPopSound(); speakWord('${escAttr(item.en)}')" class="w-9 h-9 rounded-xl bg-indigo-500/15 hover:bg-indigo-500/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center transition shrink-0" title="استمع للفظ">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+            </div>
+        `).join('');
     }
 
     function filterVocab() {
-        const q = document.getElementById('vocab-search').value.trim().toLowerCase();
-        const unit = CURRICULUM.find(u => u.id === currentUnitId);
-        if (!unit) return;
-        renderVocabGrid(unit.vocab.filter(v => v.en.toLowerCase().includes(q) || v.ar.includes(q)));
+        const query = document.getElementById('vocab-search').value.toLowerCase().trim();
+        const unit = CURRICULUM[currentUnitIndex];
+        if (!query) {
+            renderVocab(unit.vocab);
+            return;
+        }
+        const filtered = unit.vocab.filter(v => v.en.toLowerCase().includes(query) || v.ar.includes(query));
+        renderVocab(filtered);
     }
+
+    function speakWord(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function renderGrammar(grammarObj) {
+        const titleEl = document.getElementById('grammar-title');
+        const contentEl = document.getElementById('grammar-content');
+        if (titleEl) titleEl.innerText = grammarObj.title;
+        if (contentEl) {
+            contentEl.innerHTML = `
+                <div class="p-4 sm:p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 space-y-3">
+                    <h3 class="font-bold text-sm sm:text-base text-indigo-600 dark:text-indigo-300">📌 القاعدة بالتفصيل:</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed">${esc(grammarObj.explanation)}</p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-bold text-sm sm:text-base text-indigo-600 dark:text-indigo-300">💡 أمثلة توضيحية:</h3>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        ${grammarObj.examples.map(ex => `
+                            <div class="p-3.5 rounded-xl bg-white dark:bg-darkCard border border-slate-200 dark:border-darkBorder flex items-center justify-between gap-3 shadow-sm">
+                                <span class="text-xs sm:text-sm font-semibold en-inline" dir="ltr">${esc(ex)}</span>
+                                <button onclick="playPopSound(); speakWord('${escAttr(ex)}')" class="p-2 rounded-lg bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/30 transition shrink-0">
+                                    <i class="fa-solid fa-volume-high text-xs"></i>
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    // Challenge Game Questions Bank
+    let currentGameIndex = 0;
+    const CHALLENGE_QUESTIONS = [
+        { q: "Water weeds grow near ____.", options: ["The Nile River", "Deserts", "Clouds"], answer: 0 },
+        { q: "We should eat fruits because they contain ____.", options: ["vitamins", "droughts", "weeds"], answer: 0 },
+        { q: "A ____ pumps blood through our blood vessels.", options: ["heart", "shade", "branch"], answer: 0 },
+        { q: "Yesterday, it was very hot due to a ____.", options: ["heatwave", "water weed", "recipe"], answer: 0 },
+        { q: "The word 'Selfish' means thinking only of oneself.", options: ["True", "False"], answer: 0, isTF: true },
+        { q: "He (walk) ____ in the park every morning.", options: ["walks", "walked", "walking"], answer: 0 }
+    ];
 
     function renderChallengeGame() {
-        const item = MASSIVE_CHALLENGE_BANK[challengeIndex % MASSIVE_CHALLENGE_BANK.length];
-        const badge = document.getElementById('game-score-badge');
-        if (badge) badge.textContent = `${totalXP} XP`;
         const container = document.getElementById('game-container');
         if (!container) return;
+        const q = CHALLENGE_QUESTIONS[currentGameIndex];
+        if (!q) {
+            container.innerHTML = `<div class="p-6 text-center text-lg font-bold">🎉 تهانينا! أكملت جميع التحديات!</div>`;
+            return;
+        }
 
-        let innerHTML = `
-            <div class="max-w-xl mx-auto space-y-4 w-full px-1 box-sizing">
-                <div class="flex items-center justify-between">
-                    <div class="text-[11px] sm:text-xs font-bold text-indigo-400 bg-indigo-500/10 py-1 px-2.5 rounded-xl border border-indigo-500/20">سؤال ${(challengeIndex % MASSIVE_CHALLENGE_BANK.length) + 1} من ${MASSIVE_CHALLENGE_BANK.length}</div>
-                    <div class="text-[11px] sm:text-xs font-bold text-emerald-400 bg-emerald-500/10 py-1 px-2.5 rounded-xl border border-emerald-500/20">متجاوب 🌟</div>
-                </div>`;
-
-        if (item.type === 'reorder') {
-            const words = item.sentence.replace(/[.!?,]+$/g, '').split(' ');
-            const firstWord = words.length > 0 ? words[0] : '';
-            reorderState = { placed: [], pool: shuffle(words.map((w, i) => ({ w, i, used: false }))) };
-            innerHTML += `
-                <div class="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 text-left w-full overflow-hidden" dir="ltr">
-                    <div class="text-[10px] sm:text-[11px] font-bold text-indigo-300">💡 أول كلمة تبدأ بها الجملة:</div>
-                    <div class="text-xs sm:text-sm font-black text-amber-300 mt-1">${esc(firstWord)}</div>
+        container.innerHTML = `
+            <div class="max-w-xl mx-auto space-y-6 text-right">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
+                    <span>السؤال ${currentGameIndex + 1} من ${CHALLENGE_QUESTIONS.length}</span>
+                    <span class="en-inline" dir="ltr">+20 XP</span>
                 </div>
-                <div id="answer-slot" class="min-h-[65px] p-3 rounded-2xl bg-darkBg border-2 border-dashed border-indigo-500/40 flex flex-wrap gap-1.5 items-center justify-center shadow-inner w-full" dir="ltr"></div>
-                <div id="words-pool" class="flex flex-wrap gap-1.5 justify-center w-full" dir="ltr"></div>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2 w-full">
-                    <button onclick="playPopSound(); checkReorderAnswer()" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl transition text-xs sm:text-sm">تحقق من الإجابة</button>
-                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-amber-500/20 text-amber-300 font-bold rounded-2xl transition text-xs sm:text-sm border border-amber-500/30">التالي ➡</button>
-                </div>`;
-        } else if (item.type === 'tf') {
-            innerHTML += `
-                <div class="p-3.5 sm:p-5 rounded-2xl bg-darkBg border-2 border-indigo-500/40 text-sm sm:text-lg font-black text-white en-text my-2 shadow-inner text-center break-words" dir="ltr">"${esc(item.sentence)}"</div>
-                <div class="text-[11px] sm:text-xs text-indigo-300 font-bold mb-2.5">حدد هل الجملة صحيحة (T) أم خاطئة (F):</div>
-                <div class="grid grid-cols-2 gap-2.5" dir="ltr">
-                    <button onclick="playPopSound(); checkTrueFalseAnswer(true, ${item.isTrue})" class="p-3.5 sm:p-5 rounded-2xl bg-emerald-600/20 hover:bg-emerald-600/40 border-2 border-emerald-500 text-emerald-300 font-black text-lg sm:text-xl transition shadow-lg flex flex-col items-center justify-center gap-1">
-                        <span>[ T ]</span>
-                        <span class="text-[10px] font-semibold">(True)</span>
-                    </button>
-                    <button onclick="playPopSound(); checkTrueFalseAnswer(false, ${item.isTrue})" class="p-3.5 sm:p-5 rounded-2xl bg-rose-600/20 hover:bg-rose-600/40 border-2 border-rose-500 text-rose-300 font-black text-lg sm:text-xl transition shadow-lg flex flex-col items-center justify-center gap-1">
-                        <span>[ F ]</span>
-                        <span class="text-[10px] font-semibold">(False)</span>
-                    </button>
-                </div>
-                <div class="flex justify-end pt-2 w-full">
-                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-xs border border-darkBorder">تخطي / التالي ➡</button>
-                </div>`;
-        } else if (item.type === 'choose') {
-            const shuffledOpts = shuffle(item.options);
-            innerHTML += `
-                <div class="text-sm sm:text-lg font-black text-white en-text my-2 break-words" dir="ltr">${esc(item.q)}</div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" dir="ltr">
-                    ${shuffledOpts.map(opt => `
-                        <button onclick="playPopSound(); checkChooseAnswer('${escAttr(opt)}', '${escAttr(item.ans)}')" class="p-3 sm:p-4 rounded-2xl glass-panel border border-darkBorder font-bold text-xs sm:text-sm text-slate-100 hover:border-indigo-500 transition en-text text-left break-words">${esc(opt)}</button>
+                <h3 class="text-base sm:text-xl font-black text-slate-900 dark:text-white en-inline leading-relaxed" dir="ltr">${esc(q.q)}</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    ${q.options.map((opt, idx) => `
+                        <button onclick="checkAnswer(${idx})" class="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-darkCard hover:bg-indigo-600 hover:text-white border border-slate-200 dark:border-darkBorder font-bold text-xs sm:text-sm text-center transition hover-lift shadow-sm">
+                            ${esc(opt)}
+                        </button>
                     `).join('')}
                 </div>
-                <div class="flex justify-end pt-2 w-full">
-                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-xs border border-darkBorder">تخطي / التالي ➡</button>
-                </div>`;
-        } else if (item.type === 'bracket') {
-            innerHTML += `
-                <div class="p-3.5 sm:p-4 rounded-2xl bg-darkBg border border-darkBorder space-y-2.5">
-                    <div class="text-[11px] sm:text-xs font-bold text-amber-300">${esc(item.hint)}</div>
-                    <div class="text-sm sm:text-lg font-black text-white en-text tracking-wide break-words" dir="ltr">"${esc(item.sentence)}"</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(selected) {
+        const q = CHALLENGE_QUESTIONS[currentGameIndex];
+        if (selected === q.answer) {
+            playCorrectSound();
+            addXP(20);
+            currentGameIndex = (currentGameIndex + 1) % CHALLENGE_QUESTIONS.length;
+            renderChallengeGame();
+        } else {
+            playWrongSound();
+            alert("إجابة خاطئة! حاول مرة أخرى 💡");
+        }
+    }
+
+    // Custom Games Logic
+    function renderCustomGames() {
+        const container = document.getElementById('custom-games-grid');
+        if (!container) return;
+        if (customGames.length === 0) {
+            container.innerHTML = `<div class="col-span-full text-center text-slate-500 text-xs sm:text-sm py-8">لا توجد ألعاب مخصصة حتى الآن. انقر على "ابتكر لعبة جديدة" للبدء!</div>`;
+            return;
+        }
+        container.innerHTML = customGames.map((game, i) => {
+            const isAuthor = !game.author || game.author === userName || game.isUserCreated;
+            return `
+            <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-darkBorder shadow-md space-y-3 relative group">
+                ${isAuthor ? `
+                <button type="button" onclick="event.stopPropagation(); deleteCustomGame(${i});" class="absolute top-3 left-3 w-7 h-7 rounded-full bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center text-xs font-bold transition shadow z-10 cursor-pointer" title="حذف اللعبة">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                ` : ''}
+                <div class="pr-6">
+                    <h4 class="font-black text-sm sm:text-base text-indigo-600 dark:text-indigo-400">${esc(game.title)}</h4>
+                    <p class="text-xs text-slate-500 mt-0.5">${game.questions ? game.questions.length : 0} أسئلة • الناشر: ${esc(game.author || 'بطل خامسة')}</p>
                 </div>
-                <input type="text" id="type-answer-input" onkeydown="if(event.key==='Enter')" placeholder="اكتب التصحيح هنا..." class="w-full px-3.5 sm:px-4 py-3 rounded-2xl bg-darkBg border-2 border-indigo-500/50 text-xs sm:text-sm en-text shadow-inner text-white font-bold mt-2.5" dir="ltr">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2 w-full">
-                    <button onclick="playPopSound(); checkGeneralInputAnswer('${escAttr(item.target)}')" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl transition text-xs sm:text-sm">تحقق من الإجابة</button>
-                    <button onclick="playPopSound(); nextChallenge()" class="w-full sm:w-auto px-4 py-2.5 bg-amber-500/20 text-amber-300 font-bold rounded-2xl transition text-xs sm:text-sm border border-amber-500/30">التالي ➡</button>
-                </div>`;
-        }
-
-        innerHTML += `</div>`;
-        container.innerHTML = innerHTML;
-        if (item.type === 'reorder') refreshReorderUI();
+                <button onclick="playPopSound(); playCustomGame(${i})" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">العب الآن</button>
+            </div>
+            `;
+        }).join('');
     }
 
-    function checkTrueFalseAnswer(userChoice, correctChoice) {
-        if (userChoice === correctChoice) {
+    function deleteCustomGame(index) {
+        customGames.splice(index, 1);
+        lsSet('quest_custom_games', JSON.stringify(customGames));
+        renderCustomGames();
+        playPopSound();
+    }
+
+    function openCreateGameModal() {
+        resetQuestionBuilder();
+        showModal('create-game-modal');
+    }
+
+    function closeCreateGameModal() {
+        hideModal('create-game-modal');
+    }
+
+    function resetQuestionBuilder() {
+        const container = document.getElementById('questions-builder-container');
+        if (container) {
+            container.innerHTML = '';
+            addQuestionField();
+        }
+    }
+
+    function addQuestionField() {
+        const container = document.getElementById('questions-builder-container');
+        if (!container) return;
+        const qIndex = container.children.length;
+        const div = document.createElement('div');
+        div.className = "p-3 rounded-xl bg-slate-100 dark:bg-darkBg border border-slate-200 dark:border-darkBorder space-y-2";
+        div.innerHTML = `
+            <input type="text" placeholder="السؤال ${qIndex + 1}" class="q-title w-full px-3 py-2 rounded-lg bg-white dark:bg-darkCard border text-xs text-slate-800 dark:text-slate-100">
+            <input type="text" placeholder="الإجابة الصحيحة" class="q-ans w-full px-3 py-2 rounded-lg bg-white dark:bg-darkCard border text-xs text-slate-800 dark:text-slate-100">
+        `;
+        container.appendChild(div);
+    }
+
+    function saveCustomGameMulti() {
+        try {
+            const titleInput = document.getElementById('new-game-title');
+            const typeInput = document.getElementById('new-game-type');
+            
+            const title = titleInput ? titleInput.value.trim() : '';
+            const type = typeInput ? typeInput.value : 'choose';
+            
+            const qBlocks = document.querySelectorAll('#questions-builder-container > div');
+            let questions = [];
+
+            qBlocks.forEach(b => {
+                const qT = b.querySelector('.q-title')?.value.trim();
+                const qA = b.querySelector('.q-ans')?.value.trim();
+                if (qT && qA) {
+                    questions.push({ question: qT, answer: qA });
+                }
+            });
+
+            if (!title) {
+                alert('يرجى كتابة اسم اللعبة!');
+                return;
+            }
+
+            if (questions.length === 0) {
+                alert('يرجى إضافة سؤال واحد على الأقل مع إجابته الصحيحة!');
+                return;
+            }
+
+            const newGame = {
+                id: Date.now(),
+                title: title,
+                type: type,
+                questions: questions,
+                author: userName || 'بطل خامسة',
+                isUserCreated: true
+            };
+
+            customGames.unshift(newGame);
+            lsSet('quest_custom_games', JSON.stringify(customGames));
+            
+            // Clear inputs
+            if (titleInput) titleInput.value = '';
+            
+            closeCreateGameModal();
+            renderCustomGames();
             playCorrectSound();
-            addXP(25);
-            showNotification('🎉 إجابة صحيحة! +25 نقطة خبرة');
-            setTimeout(() => { challengeIndex++; saveChallengeIndex(); renderChallengeGame(); }, 1200);
+            addXP(50);
+            
+            alert('🎉 تم نشر لعبتك المبتكرة بنجاح ودمجها في المنصة!');
+        } catch (err) {
+            console.error("Error in saveCustomGameMulti:", err);
+            alert("حدث خطأ أثناء حفظ اللعبة، يرجى المحاولة مرة أخرى.");
+        }
+    }
+
+    let currentActiveGame = null;
+    let currentActiveQIndex = 0;
+    let currentActiveScore = 0;
+
+    function playCustomGame(index) {
+        const game = customGames[index];
+        if (!game || !game.questions || game.questions.length === 0) {
+            alert("هذه اللعبة لا تحتوي على أسئلة حالياً.");
+            return;
+        }
+
+        currentActiveGame = game;
+        currentActiveQIndex = 0;
+        currentActiveScore = 0;
+
+        document.getElementById('play-game-modal-title').innerText = `🎮 ${game.title}`;
+        showModal('play-custom-game-modal');
+        renderActiveQuestion();
+    }
+
+    function closePlayCustomGameModal() {
+        hideModal('play-custom-game-modal');
+    }
+
+    function renderActiveQuestion() {
+        const body = document.getElementById('play-game-modal-body');
+        if (!body || !currentActiveGame) return;
+
+        if (currentActiveQIndex >= currentActiveGame.questions.length) {
+            const earnedXp = currentActiveScore * 15;
+            playCorrectSound();
+            addXP(earnedXp);
+
+            body.innerHTML = `
+                <div class="text-center py-6 space-y-4">
+                    <div class="text-5xl animate-bounce">🏆</div>
+                    <h4 class="text-xl font-black text-slate-900 dark:text-white">أحسنت بطل خامسة!</h4>
+                    <p class="text-sm font-bold text-slate-600 dark:text-slate-300">أنهيت اللعبة بنجاح وحصلت على <span class="text-indigo-500 font-extrabold text-base">${earnedXp} XP</span>!</p>
+                    <button onclick="playPopSound(); closePlayCustomGameModal()" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl text-xs transition shadow-lg">إغلاق</button>
+                </div>
+            `;
+            return;
+        }
+
+        const q = currentActiveGame.questions[currentActiveQIndex];
+
+        body.innerHTML = `
+            <div class="space-y-4 text-right">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+                    <span>السؤال ${currentActiveQIndex + 1} من ${currentActiveGame.questions.length}</span>
+                    <span class="text-emerald-500 font-extrabold">النقاط الحالية: ${currentActiveScore}</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 font-black text-base text-slate-900 dark:text-white en-inline" dir="ltr">
+                    ${esc(q.question)}
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">اكتب إجابتك هنا:</label>
+                    <input type="text" id="interactive-ans-input" onkeydown="if(event.key==='Enter') checkCustomAnswer()" placeholder="إجابتك..." class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-darkBg border border-slate-300 dark:border-darkBorder text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner">
+                </div>
+                <div class="flex items-center justify-end gap-2 pt-2">
+                    <button onclick="playPopSound(); checkCustomAnswer()" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-2 cursor-pointer active:scale-95">
+                        <span>تاكيد الإجابة</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        setTimeout(() => {
+            const input = document.getElementById('interactive-ans-input');
+            if (input) input.focus();
+        }, 100);
+    }
+
+    function checkCustomAnswer() {
+        const input = document.getElementById('interactive-ans-input');
+        const userAns = input ? input.value.trim() : '';
+        if (!userAns) return;
+
+        const q = currentActiveGame.questions[currentActiveQIndex];
+        if (userAns.toLowerCase() === q.answer.trim().toLowerCase()) {
+            playCorrectSound();
+            currentActiveScore++;
+            alert("✅ إجابة صحيحة! أحسنت!");
         } else {
             playWrongSound();
-            showNotification('❌ إجابة خاطئة، حاول مرة أخرى!');
+            alert(`❌ إجابة خاطئة! الإجابة الصحيحة هي: ${q.answer}`);
         }
+
+        currentActiveQIndex++;
+        renderActiveQuestion();
     }
 
-    function refreshReorderUI() {
-        const slot = document.getElementById('answer-slot');
-        const pool = document.getElementById('words-pool');
-        if (!slot || !pool) return;
-        slot.innerHTML = reorderState.placed.length
-            ? reorderState.placed.map((tok, pos) => `
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-xs sm:text-sm shadow-md en-inline hover-lift" dir="ltr">
-                    <span>${esc(tok.w)}</span>
-                    <button onclick="playPopSound(); removeWordToken(${pos})" class="w-4 h-4 rounded-full bg-white/25 hover:bg-white/50 flex items-center justify-center text-[10px]">&times;</button>
-                </div>`).join('')
-            : `<span class="text-xs text-slate-400 font-semibold" dir="rtl">انقر على الكلمات بالترتيب الصحيح هنا...</span>`;
-        pool.innerHTML = reorderState.pool.map((tok, idx) => tok.used ? '' : `
-            <button onclick="playPopSound(); selectWordToken(${idx})" class="px-3.5 py-2 rounded-xl glass-panel border border-darkBorder font-bold text-xs sm:text-sm shadow-md hover:border-indigo-500 hover-lift transition en-inline text-slate-200" dir="ltr">${esc(tok.w)}</button>`).join('');
-    }
-
-    function selectWordToken(poolIdx) {
-        const tok = reorderState.pool[poolIdx];
-        if (!tok || tok.used) return;
-        tok.used = true;
-        reorderState.placed.push(tok);
-        refreshReorderUI();
-    }
-
-    function removeWordToken(pos) {
-        const tok = reorderState.placed.splice(pos, 1)[0];
-        if (tok) tok.used = false;
-        refreshReorderUI();
-    }
-
-    function checkReorderAnswer() {
-        const item = MASSIVE_CHALLENGE_BANK[challengeIndex % MASSIVE_CHALLENGE_BANK.length];
-        const user = reorderState.placed.map(t => t.w).join(' ');
-        const cleanTarget = item.sentence.replace(/[.!?,]+$/g, '');
-        if (user === cleanTarget) {
-            playCorrectSound();
-            addXP(25);
-            speakText(item.sentence);
-            showNotification('🎉 إجابة صحيحة! أحسنت +25 نقطة خبرة');
-            setTimeout(() => { challengeIndex++; saveChallengeIndex(); renderChallengeGame(); }, 1200);
-        } else {
-            playWrongSound();
-            showNotification('❌ ترتيب غير صحيح، جرب مرة أخرى!');
+    // Custom Stories Logic
+    function renderStories() {
+        const container = document.getElementById('stories-grid');
+        if (!container) return;
+        if (!customStories || customStories.length === 0) {
+            container.innerHTML = `<div class="col-span-full text-center text-slate-500 text-xs sm:text-sm py-8">لا توجد قصص بعد. أضف قصتك الأولى أعلاه!</div>`;
+            return;
         }
+        container.innerHTML = customStories.map((story, i) => {
+            const isAuthor = !story.author || story.author === userName || story.isUserCreated;
+            return `
+            <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-darkBorder shadow-md space-y-3 text-right relative group">
+                ${isAuthor ? `
+                <button type="button" onclick="event.stopPropagation(); deleteCustomStory(${i});" class="absolute top-3 left-3 w-7 h-7 rounded-full bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center text-xs font-bold transition shadow z-10 cursor-pointer" title="حذف القصة">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                ` : ''}
+                <div class="flex items-center justify-between pr-2">
+                    <span class="text-xs bg-indigo-500/10 text-indigo-500 font-bold px-2 py-0.5 rounded-md">${esc(story.type)}</span>
+                    <h4 class="font-black text-sm sm:text-base text-slate-900 dark:text-white en-inline" dir="ltr">${esc(story.title)}</h4>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed en-inline" dir="ltr">${esc(story.text)}</p>
+                <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-darkBorder/50">
+                    <span class="text-[10px] text-indigo-500 font-bold">📖 قصة إنجليزية</span>
+                    <span class="text-[10px] text-slate-400 font-semibold">بواسطة: ${esc(story.author || 'كاتب مجهول')}</span>
+                </div>
+            </div>
+            `;
+        }).join('');
     }
 
-    function checkChooseAnswer(given, correct) {
-        if (String(given).trim().toLowerCase() === String(correct).trim().toLowerCase()) {
-            playCorrectSound();
-            addXP(25);
-            showNotification('🎉 إجابة صحيحة! +25 نقطة خبرة');
-            setTimeout(() => { challengeIndex++; saveChallengeIndex(); renderChallengeGame(); }, 1200);
-        } else {
-            playWrongSound();
-            showNotification('❌ إجابة خاطئة، حاول مرة أخرى!');
-        }
+    function deleteCustomStory(index) {
+        customStories.splice(index, 1);
+        lsSet('quest_custom_stories', JSON.stringify(customStories));
+        renderStories();
+        playPopSound();
     }
 
-    function checkGeneralInputAnswer(correct) {
-        const input = document.getElementById('type-answer-input');
-        const val = input ? input.value.trim().toLowerCase() : '';
-        if (val === correct.toLowerCase()) {
+    function saveCustomStory() {
+        try {
+            const titleInput = document.getElementById('custom-story-title');
+            const typeInput = document.getElementById('custom-story-type');
+            const textInput = document.getElementById('custom-story-text');
+
+            const title = titleInput ? titleInput.value.trim() : '';
+            const type = typeInput ? typeInput.value : 'Adventure';
+            const text = textInput ? textInput.value.trim() : '';
+
+            if (!title) {
+                alert('يرجى إدخال عنوان القصة!');
+                return;
+            }
+            if (!text) {
+                alert('يرجى إدخال نص القصة باللغة الإنجليزية!');
+                return;
+            }
+
+            const newStory = {
+                id: Date.now(),
+                title: title,
+                type: type,
+                text: text,
+                author: userName || 'بطل خامسة',
+                isUserCreated: true
+            };
+
+            customStories.unshift(newStory);
+            lsSet('quest_custom_stories', JSON.stringify(customStories));
+
+            if (titleInput) titleInput.value = '';
+            if (textInput) textInput.value = '';
+
+            renderStories();
             playCorrectSound();
             addXP(30);
-            speakText(correct);
-            showNotification('🎉 ممتاز! إجابة صحيحة +30 نقطة خبرة');
-            setTimeout(() => { challengeIndex++; saveChallengeIndex(); renderChallengeGame(); }, 1200);
-        } else {
-            playWrongSound();
-            showNotification('❌ حاول مرة أخرى، إجابة غير صحيحة!');
+
+            alert('✨ تم نشر قصتك بنجاح وتظهر الآن لجميع الزملاء!');
+        } catch (err) {
+            console.error("Error in saveCustomStory:", err);
+            alert("حدث خطأ أثناء حفظ القصة، يرجى المحاولة مرة أخرى.");
         }
     }
 
-    function saveChallengeIndex() { lsSet('connect5_challenge_index', challengeIndex); }
-    function nextChallenge() { challengeIndex++; saveChallengeIndex(); renderChallengeGame(); }
+    // Community & Chat Logic
+    function renderOnlineUsersList() {
+        const container = document.getElementById('online-users-list');
+        const badge = document.getElementById('online-count-badge');
+        const headerBadge = document.getElementById('header-online-badge');
+        if (badge) badge.innerText = `${onlineUsers.length} متصل`;
+        if (headerBadge) headerBadge.innerText = onlineUsers.length;
 
-    function updateThemeIcon() {
-        const icon = document.getElementById('theme-icon');
-        const iconM = document.getElementById('theme-icon-m');
-        const cls = isDarkMode ? 'fa-solid fa-moon text-amber-300' : 'fa-solid fa-sun text-amber-500';
-        if (icon) icon.className = cls;
-        if (iconM) iconM.className = cls;
+        if (!container) return;
+        container.innerHTML = onlineUsers.map(user => `
+            <div onclick="selectChatPeer(${user.id})" class="p-2.5 rounded-xl bg-white dark:bg-darkCard hover:bg-indigo-600/10 border border-slate-200 dark:border-darkBorder cursor-pointer flex items-center gap-2.5 transition">
+                <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0">${user.avatar}</div>
+                <div class="min-w-0 flex-1">
+                    <div class="font-bold text-xs text-slate-900 dark:text-white truncate">${esc(user.name)}</div>
+                    <div class="text-[10px] text-emerald-500 font-semibold">${user.status}</div>
+                </div>
+            </div>
+        `).join('');
     }
 
-    function toggleTheme() {
-        isDarkMode = !isDarkMode;
-        lsSet('connect5_dark', isDarkMode);
-        document.documentElement.classList.toggle('dark', isDarkMode);
-        document.documentElement.classList.toggle('light', !isDarkMode);
-        updateThemeIcon();
+    function selectChatPeer(userId) {
+        activeChatPeer = onlineUsers.find(u => u.id === userId);
+        if (!activeChatPeer) return;
+
+        document.getElementById('chat-peer-name').innerText = activeChatPeer.name;
+        document.getElementById('chat-peer-avatar').innerText = activeChatPeer.avatar;
+        document.getElementById('chat-peer-status').innerText = activeChatPeer.status;
+        document.getElementById('chat-status-dot').className = "w-2 h-2 rounded-full bg-emerald-500 shrink-0";
+
+        document.getElementById('chat-input-msg').disabled = false;
+        document.getElementById('chat-send-btn').disabled = false;
+
+        renderChatMessages();
     }
 
-    function updateAudioIcon() {
-        const cls = audioEnabled ? 'fa-solid fa-volume-high text-indigo-400' : 'fa-solid fa-volume-xmark text-slate-500';
-        const icon = document.getElementById('audio-icon');
-        const iconM = document.getElementById('audio-icon-m');
-        if (icon) icon.className = cls;
-        if (iconM) iconM.className = cls;
-    }
-    function toggleAudio() {
-        audioEnabled = !audioEnabled;
-        lsSet('connect5_audio', audioEnabled);
-        if (!audioEnabled && 'speechSynthesis' in window) window.speechSynthesis.cancel();
-        updateAudioIcon();
-    }
+    function renderChatMessages() {
+        const container = document.getElementById('chat-messages-box');
+        if (!container) return;
 
-    function speakText(text) {
-        if (!audioEnabled || !('speechSynthesis' in window)) return;
-        const clean = String(text).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/\(.*?\)/g, '').trim();
-        if (!clean) return;
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(clean);
-        u.lang = /[\u0600-\u06FF]/.test(clean) ? 'ar-EG' : 'en-US';
-        u.rate = 0.85;
-        window.speechSynthesis.speak(u);
-    }
-
-    function renderVocabGrid(list) {
-        const grid = document.getElementById('vocab-grid');
-        if (!list.length) {
-            grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 text-xs sm:text-sm">لا توجد نتائج مطابقة</div>`;
+        if (!activeChatPeer) {
+            container.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">اختر طالباً من القائمة لإرسال الرسائل الفورية 🚀</div>`;
             return;
         }
-        grid.innerHTML = list.map(item => `
-            <div class="group p-4 sm:p-5 rounded-2xl glass-panel border border-darkBorder shadow-md hover:border-indigo-500/50 hover-lift transition cursor-pointer w-full" onclick="playPopSound(); speakText('${escAttr(item.en)}')">
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] font-bold text-indigo-300 bg-indigo-500/15 px-2.5 py-1 rounded-xl en-inline border border-indigo-500/30" dir="ltr">${esc(item.type)}</span>
-                    <button onclick="event.stopPropagation(); playPopSound(); speakText('${escAttr(item.en)}')" class="w-8 h-8 rounded-xl bg-indigo-500/25 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition text-indigo-300 text-xs" title="انطق الكلمة">🔊</button>
-                </div>
-                <div class="mt-3">
-                    <div class="font-black text-lg sm:text-xl text-white group-hover:text-indigo-300 transition en-text" dir="ltr">${esc(item.en)}</div>
-                    <div class="text-xs sm:text-sm text-slate-300 mt-1 font-semibold">${esc(item.ar)}</div>
-                </div>
-            </div>`).join('');
-    }
 
-    function addXP(amount) {
-        totalXP += amount;
-        lsSet('connect5_xp', totalXP);
-        updateXPDisplay();
-    }
-    function updateXPDisplay() {
-        document.getElementById('total-xp').textContent = totalXP + ' XP';
-        const badge = document.getElementById('game-score-badge');
-        if (badge) badge.textContent = totalXP + ' XP';
-    }
-    function showNotification(text) {
-        const n = document.createElement('div');
-        n.className = 'fixed bottom-6 right-4 left-4 sm:left-auto sm:right-6 z-[70] glass-panel text-white px-5 py-3.5 rounded-2xl shadow-2xl text-xs sm:text-sm font-bold border border-indigo-500/40 text-center backdrop-blur-md animate-bounce';
-        n.textContent = text;
-        document.body.appendChild(n);
-        setTimeout(() => n.remove(), 4000);
-    }
-
-    function renderCustomGames() {
-        const grid = document.getElementById('custom-games-grid');
-        if (!grid) return;
-        if (!customGames.length) {
-            grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 text-xs sm:text-sm">لا توجد ألعاب مبتكرة بعد.</div>`;
+        const msgs = chatMessages[activeChatPeer.id] || [];
+        if (msgs.length === 0) {
+            container.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">ابدأ المحادثة الآن مع ${esc(activeChatPeer.name)}!</div>`;
             return;
         }
-    }
-    function renderStories() {}
-    function renderOnlineUsersList() {}
-    function renderChatMessages() {}
 
+        container.innerHTML = msgs.map(m => `
+            <div class="flex flex-col ${m.sender === 'me' ? 'items-end' : 'items-start'}">
+                <div class="px-3.5 py-2 rounded-2xl text-xs max-w-[80%] ${m.sender === 'me' ? 'bg-indigo-600 text-white rounded-br-none' : 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-bl-none'} shadow">
+                    ${esc(m.text)}
+                </div>
+            </div>
+        `).join('');
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function sendChatMessage() {
+        const input = document.getElementById('chat-input-msg');
+        const text = input ? input.value.trim() : '';
+        if (!text || !activeChatPeer) return;
+
+        if (!chatMessages[activeChatPeer.id]) {
+            chatMessages[activeChatPeer.id] = [];
+        }
+
+        chatMessages[activeChatPeer.id].push({ sender: 'me', text });
+        lsSet('quest_chat_msgs', JSON.stringify(chatMessages));
+        input.value = '';
+        renderChatMessages();
+    }
+
+    // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
-        document.documentElement.classList.toggle('dark', isDarkMode);
-        document.documentElement.classList.toggle('light', !isDarkMode);
-        updateThemeIcon();
+        applyTheme();
+        updateXPDisplay();
         updateAudioIcon();
         updateAvatarDisplay();
-        initShuffledChallengeBank();
-        renderUnitsBar();
-        loadUnitData(currentUnitId);
-        renderCustomGames();
-        renderStories();
-        updateXPDisplay();
-        switchTab('vocab');
+        loadUnitData(0);
 
-        const splashProg = document.getElementById('splash-progress');
-        const splashEl = document.getElementById('startup-splash');
-        if (splashProg) splashProg.style.width = '100%';
         setTimeout(() => {
-            if (splashEl) {
-                splashEl.style.opacity = '0';
-                setTimeout(() => splashEl.remove(), 700);
-            }
-        }, 900);
+            const splash = document.getElementById('startup-splash');
+            const progress = document.getElementById('splash-progress');
+            if (progress) progress.style.width = '100%';
+            setTimeout(() => {
+                if (splash) {
+                    splash.style.opacity = '0';
+                    setTimeout(() => splash.remove(), 700);
+                }
+            }, 600);
+        }, 300);
     });
     </script>
 </body>
